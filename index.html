@@ -136,7 +136,7 @@
       if (!sorted.length) return '<div class="empty">No trades yet.</div>';
       const rows = sorted.map(r => {
         const ts      = r.ts.slice(0, 16).replace('T', ' ');
-        const asset   = r.kalshi_ticker?.startsWith('KXETH') ? 'ETH' : 'BTC';
+        const asset   = (r.eth_entry || r.eth_close || (r.kalshi_level && r.kalshi_level < 10000)) ? 'ETH' : 'BTC';
         const outcome = r.resolved
           ? (r.outcome === 'WIN' ? '<span class="outcome-win">WIN</span>' : '<span class="outcome-loss">LOSS</span>')
           : '<span class="outcome-pending">PENDING</span>';
