@@ -107,6 +107,11 @@
         <div class="platform-split" id="ov-bal-split"></div>
       </div>
       <div class="overview-item">
+        <label>Net P&amp;L</label>
+        <div class="val" id="ov-net-pnl">—</div>
+        <div class="sub" id="ov-net-sub"></div>
+      </div>
+      <div class="overview-item">
         <label>Live Earnings</label>
         <div class="val" id="ov-pnl">—</div>
         <div class="sub" id="ov-pnl-sub"></div>
@@ -115,11 +120,6 @@
         <label>Live Win Rate</label>
         <div class="val white" id="ov-winrate">—</div>
         <div class="sub" id="ov-trades-sub"></div>
-      </div>
-      <div class="overview-item">
-        <label>Live Trades</label>
-        <div class="val white" id="ov-trades">—</div>
-        <div class="sub" id="ov-resolved-sub"></div>
       </div>
     </div>
     <div id="cards" class="cards"></div>
@@ -232,18 +232,37 @@
       } catch { return null; }
     }
 
-    function renderOverview(s) {
+    async function fetchBaseline() {
+      try {
+        const r = await fetch(`${RAW}/baseline.json?t=${Date.now()}`);
+        return r.ok ? await r.json() : null;
+      } catch { return null; }
+    }
+
+    function renderOverview(s, baseline) {
       if (!s) return;
       const kalshi = s.kalshi_balance != null ? `$${s.kalshi_balance.toFixed(2)}` : '—';
       const poly   = s.poly_balance   != null ? `$${s.poly_balance.toFixed(2)}`   : '—';
-      const total  = (s.kalshi_balance != null && s.poly_balance != null)
-        ? `$${(s.kalshi_balance + s.poly_balance).toFixed(2)}` : '—';
+      const currentTotal = (s.kalshi_balance != null && s.poly_balance != null)
+        ? s.kalshi_balance + s.poly_balance : null;
+      const totalStr = currentTotal != null ? `$${currentTotal.toFixed(2)}` : '—';
 
+      // Net P&L vs deposited
+      if (baseline && currentTotal != null) {
+        const deposited = baseline.total_deposited;
+        const net       = currentTotal - deposited;
+        const netColor  = net >= 0 ? '#4ade80' : '#f87171';
+        const netStr    = `${net >= 0 ? '+' : ''}$${net.toFixed(2)}`;
+        document.getElementById('ov-net-pnl').innerHTML = `<span style="color:${netColor}">${netStr}</span>`;
+        document.getElementById('ov-net-sub').textContent = `vs $${deposited.toFixed(2)} deposited`;
+      }
+
+      // Live bot earnings
       const pnl      = s.total_pnl ?? 0;
       const pnlColor = pnl >= 0 ? '#4ade80' : '#f87171';
       const pnlStr   = `${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`;
 
-      document.getElementById('ov-total-bal').textContent = total;
+      document.getElementById('ov-total-bal').textContent = totalStr;
       document.getElementById('ov-bal-split').innerHTML =
         `<span>Kalshi <b>${kalshi}</b></span><span>Poly <b>${poly}</b></span>`;
       document.getElementById('ov-pnl').innerHTML =
@@ -254,17 +273,15 @@
         s.win_rate != null ? `${s.win_rate.toFixed(0)}%` : '—';
       document.getElementById('ov-trades-sub').textContent =
         `${s.resolved ?? 0} resolved`;
-      document.getElementById('ov-trades').textContent = s.total_trades ?? '—';
-      document.getElementById('ov-resolved-sub').textContent =
-        `${s.resolved ?? 0} done, ${(s.total_trades ?? 0) - (s.resolved ?? 0)} pending`;
       document.getElementById('overview').style.display = 'flex';
     }
 
     async function load() {
       try {
-        const [results, statsData] = await Promise.all([
+        const [results, statsData, baseline] = await Promise.all([
           Promise.all(BOTS.map(b => fetchLedger(b.file))),
           fetchStats(),
+          fetchBaseline(),
         ]);
         const allTrades = [];
 
@@ -279,7 +296,7 @@
         document.getElementById('last-updated').innerHTML =
           `<span class="live-dot"></span>${new Date().toUTCString().slice(17, 25)} UTC`;
 
-        renderOverview(statsData);
+        renderOverview(statsData, baseline);
       } catch (e) {
         document.getElementById('error').style.display = 'block';
         document.getElementById('error').textContent = `Error: ${e.message}`;
