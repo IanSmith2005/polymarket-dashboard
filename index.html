@@ -50,6 +50,17 @@
     .empty { text-align: center; padding: 40px; color: #475569; font-size: 14px; }
     .loading { text-align: center; padding: 80px; color: #475569; }
     .error-msg { background: #2d1515; border: 1px solid #7f1d1d; border-radius: 8px; padding: 16px; margin-bottom: 24px; color: #fca5a5; font-size: 13px; }
+
+    .overview { background: #161b27; border: 1px solid #1e2433; border-radius: 12px; padding: 24px 32px; margin-bottom: 32px; display: flex; gap: 0; }
+    .overview-item { flex: 1; border-right: 1px solid #1e2433; padding: 0 28px; }
+    .overview-item:first-child { padding-left: 0; }
+    .overview-item:last-child { border-right: none; }
+    .overview-item label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+    .overview-item .val { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .overview-item .sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+    .platform-split { display: flex; gap: 12px; margin-top: 6px; }
+    .platform-split span { font-size: 12px; color: #94a3b8; }
+    .platform-split span b { color: #e2e8f0; }
   </style>
 </head>
 <body>
@@ -60,6 +71,28 @@
 
   <div class="container">
     <div id="error" style="display:none" class="error-msg"></div>
+    <div id="overview" class="overview" style="display:none">
+      <div class="overview-item">
+        <label>Total Balance</label>
+        <div class="val" id="ov-total-bal">—</div>
+        <div class="platform-split" id="ov-bal-split"></div>
+      </div>
+      <div class="overview-item">
+        <label>Total Earnings</label>
+        <div class="val" id="ov-pnl">—</div>
+        <div class="sub" id="ov-pnl-sub"></div>
+      </div>
+      <div class="overview-item">
+        <label>Overall Win Rate</label>
+        <div class="val white" id="ov-winrate">—</div>
+        <div class="sub" id="ov-trades-sub"></div>
+      </div>
+      <div class="overview-item">
+        <label>Trades</label>
+        <div class="val white" id="ov-trades">—</div>
+        <div class="sub" id="ov-resolved-sub"></div>
+      </div>
+    </div>
     <div id="cards" class="cards"></div>
     <div class="section-title">Recent Trades</div>
     <div class="trades-table">
@@ -163,9 +196,47 @@
       </table>`;
     }
 
+    async function fetchStats() {
+      try {
+        const r = await fetch(`${RAW}/stats.json?t=${Date.now()}`);
+        return r.ok ? await r.json() : null;
+      } catch { return null; }
+    }
+
+    function renderOverview(s) {
+      if (!s) return;
+      const kalshi = s.kalshi_balance != null ? `$${s.kalshi_balance.toFixed(2)}` : '—';
+      const poly   = s.poly_balance   != null ? `$${s.poly_balance.toFixed(2)}`   : '—';
+      const total  = (s.kalshi_balance != null && s.poly_balance != null)
+        ? `$${(s.kalshi_balance + s.poly_balance).toFixed(2)}` : '—';
+
+      const pnl       = s.total_pnl ?? 0;
+      const pnlColor  = pnl >= 0 ? '#4ade80' : '#f87171';
+      const pnlStr    = `${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)}`;
+
+      document.getElementById('ov-total-bal').textContent = total;
+      document.getElementById('ov-bal-split').innerHTML =
+        `<span>Kalshi <b>${kalshi}</b></span><span>Polymarket <b>${poly}</b></span>`;
+      document.getElementById('ov-pnl').innerHTML =
+        `<span style="color:${pnlColor}">${pnlStr}</span>`;
+      document.getElementById('ov-pnl-sub').textContent =
+        `${s.wins ?? 0}W / ${s.losses ?? 0}L across all bots`;
+      document.getElementById('ov-winrate').textContent =
+        s.win_rate != null ? `${s.win_rate.toFixed(0)}%` : '—';
+      document.getElementById('ov-trades-sub').textContent =
+        `${s.resolved ?? 0} resolved`;
+      document.getElementById('ov-trades').textContent = s.total_trades ?? '—';
+      document.getElementById('ov-resolved-sub').textContent =
+        `${s.resolved ?? 0} resolved, ${(s.total_trades ?? 0) - (s.resolved ?? 0)} pending`;
+      document.getElementById('overview').style.display = 'flex';
+    }
+
     async function load() {
       try {
-        const results = await Promise.all(BOTS.map(b => fetchLedger(b.file)));
+        const [results, statsData] = await Promise.all([
+          Promise.all(BOTS.map(b => fetchLedger(b.file))),
+          fetchStats(),
+        ]);
         const allTrades = [];
 
         document.getElementById('cards').innerHTML = BOTS.map((bot, i) => {
@@ -178,6 +249,8 @@
         document.getElementById('trades-body').innerHTML = renderTrades(allTrades);
         document.getElementById('last-updated').innerHTML =
           `<span class="live-dot"></span>Updated ${new Date().toUTCString().slice(17, 25)} UTC`;
+
+        renderOverview(statsData);
       } catch (e) {
         document.getElementById('error').style.display = 'block';
         document.getElementById('error').textContent = `Error loading data: ${e.message}`;
