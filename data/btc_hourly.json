@@ -1,29 +1,29 @@
 {
   "bot": "btc_hourly",
   "status": "live",
-  "updated_at": "2026-04-12T19:50:07.491553+00:00",
+  "updated_at": "2026-04-12T20:05:09.870197+00:00",
   "wallets": {
-    "poly_usdc": 11.8679,
-    "poly_positions": 11.4974,
+    "poly_usdc": 16.6627,
+    "poly_positions": 4.8343,
     "kalshi_cash": 3.29,
-    "total": 26.6553,
+    "total": 24.787,
     "deposited": 41.77,
-    "wallet_pnl": -15.1147,
-    "kalshi_positions": 0.0
+    "wallet_pnl": -16.983,
+    "kalshi_positions": 0
   },
   "kpis": {
     "total_trades": 18,
-    "resolved": 14,
+    "resolved": 16,
     "wins": 13,
-    "losses": 1,
-    "win_rate": 92.9,
+    "losses": 3,
+    "win_rate": 81.2,
     "both_filled_rate": 83.3,
-    "avg_profit_pct_raw": 12.8,
-    "avg_pnl_per_trade": -0.365,
-    "total_pnl_adjusted": -5.11,
+    "avg_profit_pct_raw": 12.7,
+    "avg_pnl_per_trade": -0.8869,
+    "total_pnl_adjusted": -14.19,
     "full_hedge": 0,
     "covered": 13,
-    "loss": 1,
+    "loss": 3,
     "poly_only": 3
   },
   "cumulative_pnl": [
@@ -96,6 +96,16 @@
       "ts": "2026-04-12T17:00:25.293075+00:00",
       "pnl_adjusted": 0.47,
       "cumulative": -5.11
+    },
+    {
+      "ts": "2026-04-12T18:00:26.222349+00:00",
+      "pnl_adjusted": -4.54,
+      "cumulative": -9.65
+    },
+    {
+      "ts": "2026-04-12T18:00:39.606000+00:00",
+      "pnl_adjusted": -4.54,
+      "cumulative": -14.19
     }
   ],
   "trades": [
@@ -150,11 +160,11 @@
       "units": 5,
       "poly_price": 0.46,
       "kalshi_price": 0.43,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "LOSS",
+      "pnl_adjusted": -4.54,
+      "pnl_raw": -4.45,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "kalshi_fees": 0.09,
       "poly_fill_s": null,
       "kalshi_fill_s": null
@@ -170,11 +180,11 @@
       "units": 5,
       "poly_price": 0.46,
       "kalshi_price": 0.43,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "LOSS",
+      "pnl_adjusted": -4.54,
+      "pnl_raw": -4.45,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "kalshi_fees": 0.09,
       "poly_fill_s": null,
       "kalshi_fill_s": null
