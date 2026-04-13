@@ -521,6 +521,44 @@ function hedgeBadge(type) {
   return m[type] || type;
 }
 
+function groupByHour(trades) {
+  const groups = {};
+  for (const t of trades) {
+    if (!t.ts) continue;
+    const hourKey = t.ts.substring(0, 13); // "2026-04-12T09"
+    if (!groups[hourKey]) groups[hourKey] = [];
+    groups[hourKey].push(t);
+  }
+  return Object.entries(groups).map(function([key, arr]) {
+    const count = arr.length;
+    const totalPnl = arr.reduce(function(s, t) { return s + (t.pnl_adjusted || 0); }, 0);
+    const avgCost = (arr.reduce(function(s, t) { return s + (t.cost || 0); }, 0) / count).toFixed(2);
+    const avgProfit = (arr.reduce(function(s, t) { return s + (t.profit_pct_raw || 0); }, 0) / count).toFixed(1);
+    const avgDz = Math.round(arr.reduce(function(s, t) { return s + (t.dead_zone || 0); }, 0) / count);
+    const polyOk = arr.every(function(t) { return t.poly_ok; });
+    const kalshiOk = arr.every(function(t) { return t.kalshi_ok; });
+    const types = arr.map(function(t) { return t.hedge_type; });
+    const hasLoss = types.includes('LOSS');
+    const hasFH = types.includes('FULL_HEDGE');
+    const badge = hasLoss ? hedgeBadge('LOSS') :
+                  hasFH ? hedgeBadge('FULL_HEDGE') :
+                  types.includes('PENDING') ? hedgeBadge('PENDING') :
+                  hedgeBadge('COVERED');
+    return {
+      time: fmtTs(arr[0].ts),
+      trade: arr[0].trade || '-',
+      count: count,
+      avgCost: avgCost,
+      avgProfit: avgProfit,
+      dz: avgDz,
+      polyOk: polyOk,
+      kalshiOk: kalshiOk,
+      badge: badge,
+      pnl: totalPnl,
+    };
+  });
+}
+
 function renderPage(data) {
   if (!data) {
     document.getElementById('main').innerHTML = '<div class="loading">Failed to load data</div>';
@@ -632,29 +670,29 @@ function renderPage(data) {
           <thead>
             <tr>
               <th>Time</th>
-              <th>Trade</th>
-              <th>Cost</th>
-              <th>Profit</th>
+              <th>Trades</th>
+              <th>Avg Cost</th>
+              <th>Avg Profit</th>
               <th>Dead Zone</th>
               <th>Fills</th>
               <th>Outcome</th>
-              <th>PnL</th>
+              <th>Total PnL</th>
             </tr>
           </thead>
           <tbody>
-            ${(data.trades||[]).map(t => `
+            ${groupByHour(data.trades||[]).map(g => `
               <tr>
-                <td>${fmtTs(t.ts)}</td>
-                <td style="font-weight:600">${t.trade||'-'}</td>
-                <td>$${t.cost?.toFixed(2)||'-'}</td>
-                <td>${t.profit_pct_raw?.toFixed(1)||'-'}%</td>
-                <td>$${t.dead_zone?.toFixed(0)||'0'}</td>
+                <td>${g.time}</td>
+                <td style="font-weight:600">${g.trade}${g.count > 1 ? ' <span style="color:var(--accent);font-size:11px">x' + g.count + '</span>' : ''}</td>
+                <td>$${g.avgCost}</td>
+                <td>${g.avgProfit}%</td>
+                <td>$${g.dz}</td>
                 <td>
-                  <span class="fill-dot ${t.poly_ok?'ok':'no'}"></span>Poly
-                  <span class="fill-dot ${t.kalshi_ok?'ok':'no'}" style="margin-left:8px"></span>Kalshi
+                  <span class="fill-dot ${g.polyOk?'ok':'no'}"></span>Poly
+                  <span class="fill-dot ${g.kalshiOk?'ok':'no'}" style="margin-left:8px"></span>Kalshi
                 </td>
-                <td>${hedgeBadge(t.hedge_type)}</td>
-                <td class="pnl-cell ${pnlCls(t.pnl_adjusted)}">${fmtPnl(t.pnl_adjusted)}</td>
+                <td>${g.badge}</td>
+                <td class="pnl-cell ${pnlCls(g.pnl)}">${fmtPnl(g.pnl)}</td>
               </tr>
             `).join('')}
           </tbody>
