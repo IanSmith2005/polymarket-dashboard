@@ -3,446 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Arb Bot Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --bg: #0c0e14;
-      --surface: #13161f;
-      --surface2: #1a1e2b;
-      --surface3: #222738;
-      --border: rgba(255,255,255,0.06);
-      --text: #f0f2f5;
-      --text-secondary: #7c829d;
-      --text-muted: #4a506a;
-      --accent: #7c5cfc;
-      --accent-glow: rgba(124,92,252,0.25);
-      --green: #2dd4a0;
-      --green-bg: rgba(45,212,160,0.1);
-      --red: #f25c5c;
-      --red-bg: rgba(242,92,92,0.1);
-      --yellow: #f0c040;
-      --yellow-bg: rgba(240,192,64,0.1);
-      --blue: #5b8def;
-      --blue-bg: rgba(91,141,239,0.1);
-      --shadow: 0 4px 24px rgba(0,0,0,0.3);
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
-      --radius: 16px;
-      --radius-sm: 10px;
+      --bg: #0c0e14; --surface: #13161f; --surface2: #1a1e2b; --surface3: #222738;
+      --border: rgba(255,255,255,0.06); --text: #f0f2f5; --text-secondary: #7c829d;
+      --text-muted: #4a506a; --accent: #7c5cfc; --accent-glow: rgba(124,92,252,0.25);
+      --green: #2dd4a0; --green-bg: rgba(45,212,160,0.1);
+      --red: #f25c5c; --red-bg: rgba(242,92,92,0.1);
+      --yellow: #f0c040; --yellow-bg: rgba(240,192,64,0.1);
+      --blue: #5b8def; --blue-bg: rgba(91,141,239,0.1);
+      --shadow: 0 4px 24px rgba(0,0,0,0.3); --radius: 16px; --radius-sm: 10px;
     }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Layout ── */
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
     .app { display: flex; min-height: 100vh; }
 
-    /* ── Sidebar ── */
-    .sidebar {
-      width: 260px;
-      background: var(--surface);
-      padding: 0;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      border-right: 1px solid var(--border);
-    }
-    .sidebar-brand {
-      padding: 28px 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 4px 16px var(--accent-glow);
-    }
-    .brand-text {
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-    .brand-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .sidebar-section {
-      padding: 8px 12px;
-      margin-top: 8px;
-    }
-    .section-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--text-muted);
-      padding: 8px 12px;
-      font-weight: 600;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      cursor: pointer;
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s ease;
-      margin-bottom: 2px;
-    }
-    .nav-item:hover {
-      background: var(--surface2);
-      color: var(--text);
-    }
-    .nav-item.active {
-      background: linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.05));
-      color: #fff;
-      font-weight: 600;
-    }
-    .nav-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      background: var(--surface2);
-      transition: all 0.2s;
-    }
-    .nav-item.active .nav-icon {
-      background: linear-gradient(135deg, var(--accent), #a78bfa);
-      box-shadow: 0 4px 12px var(--accent-glow);
-    }
-    .nav-badge {
-      margin-left: auto;
-      font-size: 10px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
+    /* Sidebar */
+    .sidebar { width: 240px; background: var(--surface); flex-shrink: 0; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+    .sidebar-brand { padding: 24px 20px; display: flex; align-items: center; gap: 12px; }
+    .brand-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--accent), #a78bfa); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; box-shadow: 0 4px 16px var(--accent-glow); }
+    .brand-text { font-size: 16px; font-weight: 700; } .brand-sub { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+    .sidebar-section { padding: 4px 10px; margin-top: 4px; }
+    .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); padding: 8px 10px 4px; font-weight: 600; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; cursor: pointer; color: var(--text-secondary); font-size: 13px; font-weight: 500; border-radius: var(--radius-sm); transition: all 0.2s; margin-bottom: 2px; }
+    .nav-item:hover { background: var(--surface2); color: var(--text); }
+    .nav-item.active { background: linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.05)); color: #fff; font-weight: 600; }
+    .nav-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; background: var(--surface2); transition: all 0.2s; flex-shrink: 0; }
+    .nav-item.active .nav-icon { background: linear-gradient(135deg, var(--accent), #a78bfa); box-shadow: 0 4px 12px var(--accent-glow); }
+    .nav-badge { margin-left: auto; font-size: 9px; padding: 2px 8px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px; flex-shrink: 0; }
     .nav-badge.live { background: var(--green-bg); color: var(--green); }
     .nav-badge.paper { background: var(--yellow-bg); color: var(--yellow); }
+    .sidebar-footer { margin-top: auto; padding: 16px 20px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); }
 
-    .sidebar-footer {
-      margin-top: auto;
-      padding: 20px 24px;
-      border-top: 1px solid var(--border);
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* ── Main Content ── */
-    .main {
-      flex: 1;
-      padding: 36px 40px;
-      overflow-y: auto;
-      background: var(--bg);
-    }
-
-    .page-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .page-title {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-    .status-pill {
-      font-size: 11px;
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
+    /* Main */
+    .main { flex: 1; padding: 32px 36px; overflow-y: auto; }
+    .page-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+    .page-title { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+    .status-pill { font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 700; letter-spacing: 0.5px; }
     .status-pill.live { background: var(--green-bg); color: var(--green); }
     .status-pill.paper { background: var(--yellow-bg); color: var(--yellow); }
-    .page-meta {
-      margin-left: auto;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
+    .page-meta { margin-left: auto; font-size: 12px; color: var(--text-muted); font-weight: 500; }
 
-    /* ── KPI Cards ── */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-    .kpi-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 24px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .kpi-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-    .kpi-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .kpi-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-    .kpi-icon.green { background: var(--green-bg); }
-    .kpi-icon.blue { background: var(--blue-bg); }
-    .kpi-icon.yellow { background: var(--yellow-bg); }
-    .kpi-icon.red { background: var(--red-bg); }
+    /* KPI grid */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; transition: transform 0.2s, box-shadow 0.2s; }
+    .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .kpi-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .kpi-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+    .kpi-icon.green { background: var(--green-bg); } .kpi-icon.blue { background: var(--blue-bg); }
+    .kpi-icon.yellow { background: var(--yellow-bg); } .kpi-icon.red { background: var(--red-bg); }
     .kpi-icon.accent { background: rgba(124,92,252,0.12); }
-    .kpi-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 600;
-      letter-spacing: 0.3px;
-    }
-    .kpi-value {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1;
-    }
-    .kpi-value.positive { color: var(--green); }
-    .kpi-value.negative { color: var(--red); }
-    .kpi-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 8px;
-      font-weight: 500;
-    }
+    .kpi-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+    .kpi-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
+    .kpi-value.positive { color: var(--green); } .kpi-value.negative { color: var(--red); }
+    .kpi-sub { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
 
-    /* ── Two column row ── */
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 28px;
-    }
+    /* Two-col row */
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
 
-    /* ── Outcome Distribution ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 18px;
-      letter-spacing: -0.2px;
-    }
-    .outcome-bar {
-      display: flex;
-      height: 40px;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      background: var(--surface3);
-      margin-bottom: 14px;
-    }
-    .outcome-seg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      min-width: 32px;
-      transition: flex 0.3s;
-    }
-    .outcome-seg.fh { background: var(--green); color: #0c0e14; }
-    .outcome-seg.cv { background: var(--blue); color: #fff; }
-    .outcome-seg.ls { background: var(--red); color: #fff; }
-    .outcome-seg.po { background: var(--yellow); color: #0c0e14; }
+    /* Outcome bar */
+    .outcome-bar { display: flex; height: 38px; border-radius: var(--radius-sm); overflow: hidden; background: var(--surface3); margin-bottom: 12px; }
+    .outcome-seg { display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; min-width: 28px; }
+    .outcome-seg.fh { background: var(--green); color: #0c0e14; } .outcome-seg.cv { background: var(--blue); color: #fff; }
+    .outcome-seg.ls { background: var(--red); color: #fff; } .outcome-seg.po { background: var(--yellow); color: #0c0e14; }
+    .outcome-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+    .legend-dot { width: 9px; height: 9px; border-radius: 3px; } .legend-count { font-weight: 700; color: var(--text); }
 
-    .outcome-legend {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 4px;
-    }
-    .legend-count { font-weight: 700; color: var(--text); }
-
-    /* ── Fill Rate Card ── */
-    .stat-rows {}
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    /* Stat rows */
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .stat-row:last-child { border-bottom: none; }
     .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
     .stat-value { font-size: 14px; font-weight: 700; }
 
-    /* ── Chart ── */
-    .chart-container {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 28px;
-    }
-    .chart-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
+    /* Chart */
+    .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 24px; }
+    .chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
     .chart-title { font-size: 14px; font-weight: 700; }
-    .chart-label {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
+    .chart-label { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
 
-    /* ── Trade Log ── */
-    .log-container {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-    .log-header {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-    }
+    /* Trade log */
+    .log-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .log-header { padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
     .log-title { font-size: 14px; font-weight: 700; }
-    .log-count {
-      font-size: 12px;
-      color: var(--text-muted);
-      background: var(--surface2);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
-    .log-scroll { max-height: 540px; overflow-y: auto; }
-    .log-scroll::-webkit-scrollbar { width: 6px; }
-    .log-scroll::-webkit-scrollbar-track { background: transparent; }
-    .log-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
-
+    .log-count { font-size: 12px; color: var(--text-muted); background: var(--surface2); padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+    .log-scroll { max-height: 480px; overflow-y: auto; }
+    .log-scroll::-webkit-scrollbar { width: 5px; } .log-scroll::-webkit-scrollbar-track { background: transparent; } .log-scroll::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
     .log-table { width: 100%; border-collapse: collapse; }
-    .log-table th {
-      text-align: left;
-      padding: 12px 16px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
-      font-weight: 600;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-    .log-table td {
-      padding: 14px 16px;
-      font-size: 13px;
-      border-bottom: 1px solid var(--border);
-      font-weight: 500;
-    }
-    .log-table tr:hover td { background: var(--surface2); }
-    .log-table tr:last-child td { border-bottom: none; }
-
-    .badge {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      display: inline-block;
-    }
-    .badge.fh { background: var(--green-bg); color: var(--green); }
-    .badge.cv { background: var(--blue-bg); color: var(--blue); }
-    .badge.ls { background: var(--red-bg); color: var(--red); }
-    .badge.pending { background: rgba(255,255,255,0.05); color: var(--text-muted); }
-    .fill-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-right: 4px;
-    }
-    .fill-dot.ok { background: var(--green); box-shadow: 0 0 6px var(--green-bg); }
-    .fill-dot.no { background: var(--red); box-shadow: 0 0 6px var(--red-bg); }
+    .log-table th { text-align: left; padding: 10px 14px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 1; }
+    .log-table td { padding: 12px 14px; font-size: 13px; border-bottom: 1px solid var(--border); font-weight: 500; }
+    .log-table tr:hover td { background: var(--surface2); } .log-table tr:last-child td { border-bottom: none; }
+    .badge { font-size: 10px; padding: 3px 9px; border-radius: 7px; font-weight: 700; display: inline-block; }
+    .badge.fh { background: var(--green-bg); color: var(--green); } .badge.cv { background: var(--blue-bg); color: var(--blue); }
+    .badge.ls { background: var(--red-bg); color: var(--red); } .badge.pending { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+    .fill-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 3px; }
+    .fill-dot.ok { background: var(--green); } .fill-dot.no { background: var(--red); }
     .pnl-cell { font-weight: 700; font-variant-numeric: tabular-nums; }
-    .pnl-cell.positive { color: var(--green); }
-    .pnl-cell.negative { color: var(--red); }
+    .pnl-cell.positive { color: var(--green); } .pnl-cell.negative { color: var(--red); }
 
-    .loading {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 400px;
-      color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 500;
-    }
+    /* Overview-specific */
+    .overview-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 24px; display: flex; align-items: center; gap: 48px; }
+    .hero-main { flex: 1; }
+    .hero-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; letter-spacing: 0.3px; margin-bottom: 6px; }
+    .hero-pnl { font-size: 52px; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+    .hero-pnl.positive { color: var(--green); } .hero-pnl.negative { color: var(--red); }
+    .hero-sub { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+    .hero-stats { display: flex; gap: 40px; }
+    .hero-stat { text-align: center; }
+    .hero-stat-val { font-size: 20px; font-weight: 800; } .hero-stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
 
-    @media (max-width: 1200px) {
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .row-2 { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .main { padding: 20px; }
-      .kpi-grid { grid-template-columns: 1fr; }
-    }
+    .bots-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+    .bot-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .bot-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: rgba(124,92,252,0.3); }
+    .bot-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .bot-card-name { font-size: 15px; font-weight: 700; }
+    .bot-card-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .bc-stat-val { font-size: 18px; font-weight: 800; } .bc-stat-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+    .bc-pnl.positive { color: var(--green); } .bc-pnl.negative { color: var(--red); }
+
+    .loading { display: flex; align-items: center; justify-content: center; height: 400px; color: var(--text-muted); font-size: 14px; font-weight: 500; }
+
+    @media (max-width: 1100px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } .row-2 { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 20px; } .kpi-grid { grid-template-columns: 1fr; } .bots-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -456,15 +143,35 @@
       </div>
     </div>
     <div class="sidebar-section">
-      <div class="section-label">Bots</div>
-      <div class="nav-item active" data-page="btc_hourly" onclick="navigate('btc_hourly')">
-        <div class="nav-icon">1h</div>
+      <div class="section-label">General</div>
+      <div class="nav-item active" data-page="overview" onclick="navigate('overview')">
+        <div class="nav-icon">⊞</div>
+        Overview
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="section-label">Live</div>
+      <div class="nav-item" data-page="btc_hourly" onclick="navigate('btc_hourly')">
+        <div class="nav-icon">₿</div>
         BTC Hourly
         <span class="nav-badge live">LIVE</span>
       </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="section-label">Paper Trading</div>
       <div class="nav-item" data-page="btc_15min" onclick="navigate('btc_15min')">
         <div class="nav-icon">15</div>
-        BTC 15min
+        BTC 15-min
+        <span class="nav-badge paper">PAPER</span>
+      </div>
+      <div class="nav-item" data-page="eth_dry_run" onclick="navigate('eth_dry_run')">
+        <div class="nav-icon">Ξ</div>
+        ETH Hourly
+        <span class="nav-badge paper">PAPER</span>
+      </div>
+      <div class="nav-item" data-page="sol_dry_run" onclick="navigate('sol_dry_run')">
+        <div class="nav-icon">◎</div>
+        SOL Hourly
         <span class="nav-badge paper">PAPER</span>
       </div>
     </div>
@@ -477,15 +184,21 @@
 </div>
 
 <script>
-const DATA_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'data'
-  : 'https://raw.githubusercontent.com/IanSmith2005/polymarket-dashboard/main/data';
-let currentPage = 'btc_hourly';
+const DATA_BASE = 'https://raw.githubusercontent.com/IanSmith2005/polymarket-dashboard/main/data';
+
+const BOT_META = {
+  btc_hourly:  { label: 'BTC Hourly Bot',    asset: 'BTC', status: 'live'  },
+  btc_15min:   { label: 'BTC 15-min Bot',    asset: 'BTC', status: 'paper' },
+  eth_dry_run: { label: 'ETH Hourly Bot',    asset: 'ETH', status: 'paper' },
+  sol_dry_run: { label: 'SOL Hourly Bot',    asset: 'SOL', status: 'paper' },
+};
+
+let currentPage = 'overview';
 let chartInstance = null;
 
-async function fetchData(bot) {
+async function fetchData(file) {
   try {
-    const r = await fetch(`${DATA_BASE}/${bot}.json?t=${Date.now()}`);
+    const r = await fetch(`${DATA_BASE}/${file}.json?t=${Date.now()}`);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     return await r.json();
   } catch (e) {
@@ -497,26 +210,28 @@ async function fetchData(bot) {
 function fmtTs(ts) {
   if (!ts) return '-';
   const d = new Date(ts);
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ', ' +
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
          d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
 }
 
 function fmtPnl(v) {
   if (v == null) return '-';
-  return (v >= 0 ? '+' : '') + '$' + v.toFixed(2);
+  return (v >= 0 ? '+' : '') + '$' + Math.abs(v).toFixed(2);
 }
 
-function pnlCls(v) {
-  if (v == null) return '';
-  return v >= 0 ? 'positive' : 'negative';
+function signedPnl(v) {
+  if (v == null) return '-';
+  return (v >= 0 ? '+$' : '-$') + Math.abs(v).toFixed(2);
 }
+
+function pnlCls(v) { return v == null ? '' : v >= 0 ? 'positive' : 'negative'; }
 
 function hedgeBadge(type) {
   const m = {
     FULL_HEDGE: '<span class="badge fh">FULL HEDGE</span>',
-    COVERED: '<span class="badge cv">COVERED</span>',
-    LOSS: '<span class="badge ls">LOSS</span>',
-    PENDING: '<span class="badge pending">PENDING</span>',
+    COVERED:    '<span class="badge cv">COVERED</span>',
+    LOSS:       '<span class="badge ls">LOSS</span>',
+    PENDING:    '<span class="badge pending">PENDING</span>',
   };
   return m[type] || type;
 }
@@ -525,98 +240,161 @@ function groupByHour(trades) {
   const groups = {};
   for (const t of trades) {
     if (!t.ts) continue;
-    const hourKey = t.ts.substring(0, 13); // "2026-04-12T09"
-    if (!groups[hourKey]) groups[hourKey] = [];
-    groups[hourKey].push(t);
+    const key = t.ts.substring(0, 13);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(t);
   }
-  return Object.entries(groups).map(function([key, arr]) {
-    const count = arr.length;
-    const totalPnl = arr.reduce(function(s, t) { return s + (t.pnl_adjusted || 0); }, 0);
-    const avgCost = (arr.reduce(function(s, t) { return s + (t.cost || 0); }, 0) / count).toFixed(2);
-    const avgProfit = (arr.reduce(function(s, t) { return s + (t.profit_pct_raw || 0); }, 0) / count).toFixed(1);
-    const avgDz = Math.round(arr.reduce(function(s, t) { return s + (t.dead_zone || 0); }, 0) / count);
-    const polyOk = arr.every(function(t) { return t.poly_ok; });
-    const kalshiOk = arr.every(function(t) { return t.kalshi_ok; });
-    const types = arr.map(function(t) { return t.hedge_type; });
-    const hasLoss = types.includes('LOSS');
-    const hasFH = types.includes('FULL_HEDGE');
-    const badge = hasLoss ? hedgeBadge('LOSS') :
-                  hasFH ? hedgeBadge('FULL_HEDGE') :
-                  types.includes('PENDING') ? hedgeBadge('PENDING') :
-                  hedgeBadge('COVERED');
-    return {
-      time: fmtTs(arr[0].ts),
-      trade: arr[0].trade || '-',
-      count: count,
-      avgCost: avgCost,
-      avgProfit: avgProfit,
-      dz: avgDz,
-      polyOk: polyOk,
-      kalshiOk: kalshiOk,
-      badge: badge,
-      pnl: totalPnl,
-    };
+  return Object.entries(groups).map(([key, arr]) => {
+    const count      = arr.length;
+    const totalPnl   = arr.reduce((s, t) => s + (t.pnl_adjusted || 0), 0);
+    const avgCost    = (arr.reduce((s, t) => s + (t.cost || 0), 0) / count).toFixed(2);
+    const avgProfit  = (arr.reduce((s, t) => s + (t.profit_pct_raw || 0), 0) / count).toFixed(1);
+    const avgDz      = Math.round(arr.reduce((s, t) => s + (t.dead_zone || 0), 0) / count);
+    const polyOk     = arr.every(t => t.poly_ok);
+    const kalshiOk   = arr.every(t => t.kalshi_ok);
+    const types      = arr.map(t => t.hedge_type);
+    const badge      = types.includes('LOSS')    ? hedgeBadge('LOSS') :
+                       types.includes('FULL_HEDGE') ? hedgeBadge('FULL_HEDGE') :
+                       types.includes('PENDING')   ? hedgeBadge('PENDING') :
+                                                      hedgeBadge('COVERED');
+    return { time: fmtTs(arr[0].ts), trade: arr[0].trade || '-', count,
+             avgCost, avgProfit, dz: avgDz, polyOk, kalshiOk, badge, pnl: totalPnl };
   });
 }
 
-function renderPage(data) {
+// ── Overview page ─────────────────────────────────────────────────────────────
+async function renderOverview() {
+  const data = await fetchData('overview');
+  if (!data) {
+    document.getElementById('main').innerHTML = '<div class="loading">Failed to load overview</div>';
+    return;
+  }
+
+  const wp     = data.wallet_pnl;
+  const wpPct  = data.wallet_pct;
+  const dep    = data.deposited || 0;
+  const tot    = data.total;
+
+  const BOT_LABELS = {
+    btc_hourly:  { name: 'BTC Hourly',  icon: '₿',  status: 'live' },
+    btc_15min:   { name: 'BTC 15-min',  icon: '15', status: 'paper' },
+    eth_dry_run: { name: 'ETH Hourly',  icon: 'Ξ',  status: 'paper' },
+    sol_dry_run: { name: 'SOL Hourly',  icon: '◎',  status: 'paper' },
+  };
+
+  const botCards = (data.bots || []).map(b => {
+    const meta    = BOT_LABELS[b.id] || { name: b.id, icon: '?', status: b.status };
+    const pnlCss  = pnlCls(b.trade_pnl);
+    const sc      = meta.status === 'live' ? 'live' : 'paper';
+    const sl      = meta.status === 'live' ? 'LIVE' : 'PAPER';
+    return `
+      <div class="bot-card" onclick="navigate('${b.id}')">
+        <div class="bot-card-header">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="nav-icon" style="background:var(--surface2);width:36px;height:36px;border-radius:9px;font-size:14px">${meta.icon}</div>
+            <div class="bot-card-name">${meta.name}</div>
+          </div>
+          <span class="nav-badge ${sc}" style="font-size:10px;padding:3px 10px">${sl}</span>
+        </div>
+        <div class="bot-card-stats">
+          <div>
+            <div class="bc-stat-val bc-pnl ${pnlCss}">${signedPnl(b.trade_pnl)}</div>
+            <div class="bc-stat-lbl">Trade PnL</div>
+          </div>
+          <div>
+            <div class="bc-stat-val">${b.win_rate.toFixed(0)}%</div>
+            <div class="bc-stat-lbl">Win Rate</div>
+          </div>
+          <div>
+            <div class="bc-stat-val">${b.trades}</div>
+            <div class="bc-stat-lbl">Trades${b.pending > 0 ? ` <span style="color:var(--yellow);font-size:10px">(${b.pending} live)</span>` : ''}</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const html = `
+    <div class="page-header">
+      <div class="page-title">Overview</div>
+      <div class="page-meta">Last sync: ${fmtTs(data.updated_at)}</div>
+    </div>
+
+    <div class="overview-hero">
+      <div class="hero-main">
+        <div class="hero-label">REAL PORTFOLIO — BTC LIVE BOT</div>
+        <div class="hero-pnl ${pnlCls(wp)}">${signedPnl(wp)}</div>
+        <div class="hero-sub">
+          ${wpPct != null ? (wp >= 0 ? '+' : '') + wpPct + '% return' : ''}
+          &nbsp;·&nbsp; Deposited: $${dep.toFixed(2)}
+          &nbsp;·&nbsp; Current: ${tot != null ? '$' + tot.toFixed(2) : '—'}
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size:13px;color:var(--text-muted);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:12px">All Bots</div>
+    <div class="bots-grid">${botCards}</div>
+  `;
+
+  document.getElementById('main').innerHTML = html;
+}
+
+// ── Individual bot page ────────────────────────────────────────────────────────
+async function renderBotPage(page) {
+  const data = await fetchData(page);
   if (!data) {
     document.getElementById('main').innerHTML = '<div class="loading">Failed to load data</div>';
     return;
   }
 
-  const k = data.kpis;
-  const w = data.wallets || {};
-  const sc = data.status === 'live' ? 'live' : 'paper';
-  const sl = data.status === 'live' ? 'LIVE' : 'PAPER';
-  const bl = data.bot === 'btc_hourly' ? 'BTC Hourly Bot' : 'BTC 15-Minute Bot';
+  const meta = BOT_META[page] || { label: page, status: data.status };
+  const k    = data.kpis;
+  const w    = data.wallets || {};
+  const sc   = data.status === 'live' ? 'live' : 'paper';
+  const sl   = data.status === 'live' ? 'LIVE' : 'PAPER';
 
   const total = (k.full_hedge||0) + (k.covered||0) + (k.loss||0) + (k.poly_only||0);
-  const fhP = total ? (k.full_hedge/total*100) : 0;
-  const cvP = total ? (k.covered/total*100) : 0;
-  const lsP = total ? (k.loss/total*100) : 0;
-  const poP = total ? (k.poly_only/total*100) : 0;
+  const fhP   = total ? k.full_hedge/total*100 : 0;
+  const cvP   = total ? k.covered/total*100 : 0;
+  const lsP   = total ? k.loss/total*100 : 0;
+  const poP   = total ? k.poly_only/total*100 : 0;
 
-  const lastTradePnl = data.cumulative_pnl?.length ? data.cumulative_pnl[data.cumulative_pnl.length-1].cumulative : 0;
-  const headlinePnl = w.wallet_pnl != null ? w.wallet_pnl : lastTradePnl;
+  const cum         = data.cumulative_pnl || [];
+  const lastTradePnl = cum.length ? cum[cum.length-1].cumulative : 0;
+  const headlinePnl  = w.wallet_pnl != null ? w.wallet_pnl : lastTradePnl;
+
+  // For paper bots, headline is trade PnL; for live bot, show wallet PnL
+  const isLive       = data.status === 'live';
+  const displayPnl   = isLive ? headlinePnl : lastTradePnl;
+  const pnlLabel     = isLive ? 'Wallet PnL' : 'Paper PnL';
+  const pnlSub       = isLive
+    ? (w.total != null ? `Balance: $${w.total.toFixed(2)} / Deposited: $${(w.deposited||0).toFixed(2)}` : `Across ${k.resolved||0} resolved trades`)
+    : `Across ${k.resolved||0} resolved trades`;
 
   const html = `
     <div class="page-header">
-      <div class="page-title">${bl}</div>
+      <div class="page-title">${meta.label}</div>
       <div class="status-pill ${sc}">${sl}</div>
       <div class="page-meta">Last sync: ${fmtTs(data.updated_at)}</div>
     </div>
 
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-top">
-          <div class="kpi-icon green">$</div>
-          <div class="kpi-label">Wallet PnL</div>
-        </div>
-        <div class="kpi-value ${pnlCls(w.wallet_pnl)}">${w.wallet_pnl != null ? fmtPnl(w.wallet_pnl) : fmtPnl(k.total_pnl_adjusted)}</div>
-        <div class="kpi-sub">${w.total != null ? 'Balance: $' + w.total.toFixed(2) + ' / Deposited: $' + (w.deposited||0).toFixed(2) : 'Fee-adjusted across ' + (k.resolved||0) + ' trades'}</div>
+        <div class="kpi-top"><div class="kpi-icon green">$</div><div class="kpi-label">${pnlLabel}</div></div>
+        <div class="kpi-value ${pnlCls(displayPnl)}">${signedPnl(displayPnl)}</div>
+        <div class="kpi-sub">${pnlSub}</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-top">
-          <div class="kpi-icon accent">%</div>
-          <div class="kpi-label">Win Rate</div>
-        </div>
+        <div class="kpi-top"><div class="kpi-icon accent">%</div><div class="kpi-label">Win Rate</div></div>
         <div class="kpi-value">${k.win_rate?.toFixed(1)||0}%</div>
         <div class="kpi-sub">${k.wins||0} wins, ${k.losses||0} losses</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-top">
-          <div class="kpi-icon blue">~</div>
-          <div class="kpi-label">Avg PnL / Trade</div>
-        </div>
-        <div class="kpi-value ${pnlCls(k.avg_pnl_per_trade)}">${fmtPnl(k.avg_pnl_per_trade)}</div>
+        <div class="kpi-top"><div class="kpi-icon blue">~</div><div class="kpi-label">Avg PnL / Trade</div></div>
+        <div class="kpi-value ${pnlCls(k.avg_pnl_per_trade)}">${signedPnl(k.avg_pnl_per_trade)}</div>
         <div class="kpi-sub">Avg raw profit: ${k.avg_profit_pct_raw?.toFixed(1)||0}%</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-top">
-          <div class="kpi-icon yellow">H</div>
-          <div class="kpi-label">Hedge Rate</div>
-        </div>
+        <div class="kpi-top"><div class="kpi-icon yellow">H</div><div class="kpi-label">Hedge Rate</div></div>
         <div class="kpi-value">${k.both_filled_rate?.toFixed(0)||0}%</div>
         <div class="kpi-sub">${k.poly_only||0} unhedged (poly-only)</div>
       </div>
@@ -640,13 +418,11 @@ function renderPage(data) {
       </div>
       <div class="card">
         <div class="card-title">Performance Stats</div>
-        <div class="stat-rows">
-          <div class="stat-row"><span class="stat-label">Total Trades</span><span class="stat-value">${k.total_trades||0}</span></div>
-          <div class="stat-row"><span class="stat-label">Resolved</span><span class="stat-value">${k.resolved||0}</span></div>
-          <div class="stat-row"><span class="stat-label">Both Legs Filled</span><span class="stat-value">${k.both_filled_rate?.toFixed(1)||0}%</span></div>
-          <div class="stat-row"><span class="stat-label">Avg Raw Profit</span><span class="stat-value">${k.avg_profit_pct_raw?.toFixed(1)||0}%</span></div>
-          <div class="stat-row"><span class="stat-label">Full Hedges</span><span class="stat-value" style="color:var(--green)">${k.full_hedge||0}</span></div>
-        </div>
+        <div class="stat-row"><span class="stat-label">Total Trades</span><span class="stat-value">${k.total_trades||0}</span></div>
+        <div class="stat-row"><span class="stat-label">Resolved</span><span class="stat-value">${k.resolved||0}</span></div>
+        <div class="stat-row"><span class="stat-label">Both Legs Filled</span><span class="stat-value">${k.both_filled_rate?.toFixed(1)||0}%</span></div>
+        <div class="stat-row"><span class="stat-label">Avg Raw Profit</span><span class="stat-value">${k.avg_profit_pct_raw?.toFixed(1)||0}%</span></div>
+        <div class="stat-row"><span class="stat-label">Full Hedges</span><span class="stat-value" style="color:var(--green)">${k.full_hedge||0}</span></div>
       </div>
     </div>
 
@@ -654,7 +430,7 @@ function renderPage(data) {
       <div class="chart-header">
         <div>
           <div class="chart-title">Cumulative PnL</div>
-          <div class="chart-label ${pnlCls(headlinePnl)}">${fmtPnl(headlinePnl)}</div>
+          <div class="chart-label ${pnlCls(lastTradePnl)}">${signedPnl(lastTradePnl)}</div>
         </div>
       </div>
       <canvas id="pnlChart" height="90"></canvas>
@@ -667,42 +443,32 @@ function renderPage(data) {
       </div>
       <div class="log-scroll">
         <table class="log-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Trades</th>
-              <th>Avg Cost</th>
-              <th>Avg Profit</th>
-              <th>Dead Zone</th>
-              <th>Fills</th>
-              <th>Outcome</th>
-              <th>Total PnL</th>
-            </tr>
-          </thead>
+          <thead><tr>
+            <th>Time</th><th>Direction</th><th>Avg Cost</th><th>Avg Profit</th>
+            <th>Dead Zone</th><th>Fills</th><th>Outcome</th><th>Total PnL</th>
+          </tr></thead>
           <tbody>
             ${groupByHour(data.trades||[]).map(g => `
               <tr>
                 <td>${g.time}</td>
-                <td style="font-weight:600">${g.trade}${g.count > 1 ? ' <span style="color:var(--accent);font-size:11px">x' + g.count + '</span>' : ''}</td>
+                <td style="font-weight:600">${g.trade}${g.count>1?` <span style="color:var(--accent);font-size:10px">x${g.count}</span>`:''}</td>
                 <td>$${g.avgCost}</td>
                 <td>${g.avgProfit}%</td>
                 <td>$${g.dz}</td>
                 <td>
                   <span class="fill-dot ${g.polyOk?'ok':'no'}"></span>Poly
-                  <span class="fill-dot ${g.kalshiOk?'ok':'no'}" style="margin-left:8px"></span>Kalshi
+                  <span class="fill-dot ${g.kalshiOk?'ok':'no'}" style="margin-left:6px"></span>Kalshi
                 </td>
                 <td>${g.badge}</td>
-                <td class="pnl-cell ${pnlCls(g.pnl)}">${fmtPnl(g.pnl)}</td>
-              </tr>
-            `).join('')}
+                <td class="pnl-cell ${pnlCls(g.pnl)}">${signedPnl(g.pnl)}</td>
+              </tr>`).join('')}
           </tbody>
         </table>
       </div>
-    </div>
-  `;
+    </div>`;
 
   document.getElementById('main').innerHTML = html;
-  renderChart(data.cumulative_pnl || []);
+  renderChart(cum);
 }
 
 function renderChart(cumData) {
@@ -717,7 +483,7 @@ function renderChart(cumData) {
   });
   const values = cumData.map(d => d.cumulative);
 
-  const ctx = canvas.getContext('2d');
+  const ctx      = canvas.getContext('2d');
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.parentElement.clientHeight);
   gradient.addColorStop(0, 'rgba(124,92,252,0.25)');
   gradient.addColorStop(1, 'rgba(124,92,252,0)');
@@ -726,51 +492,23 @@ function renderChart(cumData) {
     type: 'line',
     data: {
       labels,
-      datasets: [{
-        data: values,
-        borderColor: '#7c5cfc',
-        backgroundColor: gradient,
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: '#7c5cfc',
-        pointHoverBorderColor: '#fff',
-        pointHoverBorderWidth: 2,
-        borderWidth: 2.5,
-      }]
+      datasets: [{ data: values, borderColor: '#7c5cfc', backgroundColor: gradient,
+        fill: true, tension: 0.4, pointRadius: 0, pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#7c5cfc', pointHoverBorderColor: '#fff',
+        pointHoverBorderWidth: 2, borderWidth: 2.5 }]
     },
     options: {
       responsive: true,
       plugins: {
         legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a1e2b',
-          titleColor: '#7c829d',
-          bodyColor: '#f0f2f5',
-          borderColor: 'rgba(255,255,255,0.06)',
-          borderWidth: 1,
-          cornerRadius: 10,
-          padding: 12,
+        tooltip: { backgroundColor: '#1a1e2b', titleColor: '#7c829d', bodyColor: '#f0f2f5',
+          borderColor: 'rgba(255,255,255,0.06)', borderWidth: 1, cornerRadius: 10, padding: 12,
           bodyFont: { weight: '700', size: 14 },
-          callbacks: { label: function(c) { return '$' + c.parsed.y.toFixed(2); } }
-        }
+          callbacks: { label: c => (c.parsed.y >= 0 ? '+$' : '-$') + Math.abs(c.parsed.y).toFixed(2) } }
       },
       scales: {
-        x: {
-          ticks: { color: '#4a506a', maxTicksLimit: 8, font: { size: 11, family: 'Inter' } },
-          grid: { color: 'rgba(255,255,255,0.03)' },
-          border: { display: false },
-        },
-        y: {
-          ticks: {
-            color: '#4a506a',
-            font: { size: 11, family: 'Inter' },
-            callback: function(v) { return '$' + v.toFixed(0); }
-          },
-          grid: { color: 'rgba(255,255,255,0.03)' },
-          border: { display: false },
-        }
+        x: { ticks: { color: '#4a506a', maxTicksLimit: 8, font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.03)' }, border: { display: false } },
+        y: { ticks: { color: '#4a506a', font: { size: 11 }, callback: v => (v>=0?'+$':'-$')+Math.abs(v).toFixed(0) }, grid: { color: 'rgba(255,255,255,0.03)' }, border: { display: false } }
       },
       interaction: { intersect: false, mode: 'index' },
     }
@@ -779,23 +517,27 @@ function renderChart(cumData) {
 
 function navigate(page) {
   currentPage = page;
-  window.location.hash = page === 'btc_15min' ? '#/btc-15min' : '#/btc-hourly';
+  window.location.hash = '#/' + page.replace('_', '-');
   document.querySelectorAll('.nav-item').forEach(el =>
     el.classList.toggle('active', el.dataset.page === page)
   );
   document.getElementById('main').innerHTML = '<div class="loading">Loading...</div>';
-  fetchData(page).then(renderPage);
+  if (page === 'overview') renderOverview();
+  else renderBotPage(page);
 }
 
 function handleHash() {
-  const h = window.location.hash.replace('#/', '').replace('#', '');
-  if (h === 'btc-15min' || h === 'btc_15min') navigate('btc_15min');
-  else navigate('btc_hourly');
+  const h = window.location.hash.replace('#/', '').replace('#', '').replace(/-/g, '_');
+  const valid = ['overview', 'btc_hourly', 'btc_15min', 'eth_dry_run', 'sol_dry_run'];
+  navigate(valid.includes(h) ? h : 'overview');
 }
 
 window.addEventListener('hashchange', handleHash);
 handleHash();
-setInterval(() => fetchData(currentPage).then(renderPage), 300000);
+setInterval(() => {
+  if (currentPage === 'overview') renderOverview();
+  else renderBotPage(currentPage);
+}, 300000);
 </script>
 </body>
 </html>
