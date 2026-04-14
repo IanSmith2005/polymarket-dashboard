@@ -1,28 +1,28 @@
 {
   "bot": "btc_hourly",
   "status": "live",
-  "updated_at": "2026-04-14T00:50:06.459425+00:00",
+  "updated_at": "2026-04-14T01:05:06.960504+00:00",
   "wallets": {
     "poly_usdc": 29.9917,
-    "poly_positions": 4.0906,
-    "kalshi_cash": 13.09,
-    "total": 47.1723,
+    "poly_positions": 0.0067,
+    "kalshi_cash": 23.09,
+    "total": 53.0884,
     "deposited": 58.85,
-    "wallet_pnl": -11.6777,
-    "kalshi_positions": 0.0
+    "wallet_pnl": -5.7616,
+    "kalshi_positions": 0
   },
   "kpis": {
     "total_trades": 42,
-    "resolved": 39,
-    "wins": 36,
+    "resolved": 40,
+    "wins": 37,
     "losses": 3,
-    "win_rate": 92.3,
+    "win_rate": 92.5,
     "both_filled_rate": 92.9,
     "avg_profit_pct_raw": 15.3,
-    "avg_pnl_per_trade": -0.0565,
-    "total_pnl_adjusted": -2.21,
+    "avg_pnl_per_trade": -0.0421,
+    "total_pnl_adjusted": -1.69,
     "full_hedge": 0,
-    "covered": 36,
+    "covered": 37,
     "loss": 3,
     "poly_only": 3
   },
@@ -221,6 +221,11 @@
       "ts": "2026-04-13T21:00:25.086405+00:00",
       "pnl_adjusted": 0.61,
       "cumulative": -2.205
+    },
+    {
+      "ts": "2026-04-13T23:09:36.884221+00:00",
+      "pnl_adjusted": 0.52,
+      "cumulative": -1.685
     }
   ],
   "trades": [
@@ -275,11 +280,11 @@
       "units": 5,
       "poly_price": 0.54,
       "kalshi_price": 0.34,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "COVERED",
+      "pnl_adjusted": 0.52,
+      "pnl_raw": 0.6,
+      "resolved": true,
+      "outcome": "WIN",
       "kalshi_fees": 0.08,
       "poly_fill_s": null,
       "kalshi_fill_s": null
