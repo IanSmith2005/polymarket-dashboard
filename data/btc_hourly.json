@@ -1,7 +1,7 @@
 {
   "bot": "btc_hourly",
   "status": "live",
-  "updated_at": "2026-04-14T01:50:06.720709+00:00",
+  "updated_at": "2026-04-14T02:05:07.071912+00:00",
   "wallets": {
     "poly_usdc": 29.9917,
     "poly_positions": 0.0043,
@@ -13,16 +13,16 @@
   },
   "kpis": {
     "total_trades": 42,
-    "resolved": 40,
-    "wins": 37,
+    "resolved": 42,
+    "wins": 39,
     "losses": 3,
-    "win_rate": 92.5,
+    "win_rate": 92.9,
     "both_filled_rate": 92.9,
-    "avg_profit_pct_raw": 15.3,
-    "avg_pnl_per_trade": -0.0421,
-    "total_pnl_adjusted": -1.69,
+    "avg_profit_pct_raw": 15.2,
+    "avg_pnl_per_trade": -0.0158,
+    "total_pnl_adjusted": -0.67,
     "full_hedge": 0,
-    "covered": 37,
+    "covered": 39,
     "loss": 3,
     "poly_only": 3
   },
@@ -226,6 +226,16 @@
       "ts": "2026-04-13T23:09:36.884221+00:00",
       "pnl_adjusted": 0.52,
       "cumulative": -1.685
+    },
+    {
+      "ts": "2026-04-14T00:16:26.054463+00:00",
+      "pnl_adjusted": 0.51,
+      "cumulative": -1.175
+    },
+    {
+      "ts": "2026-04-14T00:17:05.641486+00:00",
+      "pnl_adjusted": 0.51,
+      "cumulative": -0.665
     }
   ],
   "trades": [
@@ -240,11 +250,11 @@
       "units": 5,
       "poly_price": 0.4,
       "kalshi_price": 0.48,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "COVERED",
+      "pnl_adjusted": 0.51,
+      "pnl_raw": 0.6,
+      "resolved": true,
+      "outcome": "WIN",
       "kalshi_fees": 0.09,
       "poly_fill_s": null,
       "kalshi_fill_s": null
@@ -260,11 +270,11 @@
       "units": 5,
       "poly_price": 0.38,
       "kalshi_price": 0.5,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "COVERED",
+      "pnl_adjusted": 0.51,
+      "pnl_raw": 0.6,
+      "resolved": true,
+      "outcome": "WIN",
       "kalshi_fees": 0.09,
       "poly_fill_s": null,
       "kalshi_fill_s": null
