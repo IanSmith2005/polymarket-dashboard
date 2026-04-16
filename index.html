@@ -232,7 +232,37 @@
     .loading { display: flex; align-items: center; justify-content: center; height: 400px; gap: 10px; color: var(--text3); font-size: 13px; font-weight: 500; }
 
     @media(max-width:1100px){ .kpi-grid{grid-template-columns:repeat(2,1fr)} .row2{grid-template-columns:1fr} }
-    @media(max-width:768px) { .sidebar{display:none} .main{padding:16px} .kpi-grid{grid-template-columns:1fr} .bots-grid{grid-template-columns:1fr} }
+    @media(max-width:768px) { .sidebar{display:none} .main{padding:16px 14px 90px} .kpi-grid{grid-template-columns:1fr} .bots-grid{grid-template-columns:1fr} }
+
+    /* Mobile bottom nav */
+    .mobile-nav {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 6px 0 env(safe-area-inset-bottom, 6px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .mobile-nav-inner {
+      display: flex; justify-content: space-around; align-items: center;
+    }
+    .mob-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 10px; border-radius: 10px; cursor: pointer;
+      color: var(--text3); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.3px; transition: color 0.15s;
+      min-width: 52px; text-align: center;
+    }
+    .mob-item.active { color: var(--text); }
+    .mob-item.active .mob-ico { background: var(--grad); }
+    .mob-ico {
+      width: 32px; height: 32px; border-radius: 9px;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; transition: background 0.15s;
+    }
+    @media(max-width:768px) { .mobile-nav { display: block; } }
   </style>
 </head>
 <body>
@@ -277,6 +307,26 @@
       <div class="live-dot"></div> Syncing every 15 min
     </div>
   </nav>
+
+  <div class="mobile-nav">
+    <div class="mobile-nav-inner">
+      <div class="mob-item active" data-page="overview" onclick="nav('overview')">
+        <div class="mob-ico">⊞</div>Overview
+      </div>
+      <div class="mob-item" data-page="btc_hourly" onclick="nav('btc_hourly')">
+        <div class="mob-ico">₿</div>BTC
+      </div>
+      <div class="mob-item" data-page="eth_live" onclick="nav('eth_live')">
+        <div class="mob-ico">Ξ</div>ETH
+      </div>
+      <div class="mob-item" data-page="eth_dry_run" onclick="nav('eth_dry_run')">
+        <div class="mob-ico" style="font-size:10px">Ξ▸</div>Dry
+      </div>
+      <div class="mob-item" data-page="sol_dry_run" onclick="nav('sol_dry_run')">
+        <div class="mob-ico">◎</div>SOL
+      </div>
+    </div>
+  </div>
 
   <div class="main" id="main">
     <div class="loading">Loading…</div>
@@ -570,6 +620,7 @@ function nav(pg) {
   curPage = pg;
   window.location.hash = '#/'+pg.replace(/_/g,'-');
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.page===pg));
+  document.querySelectorAll('.mob-item').forEach(el=>el.classList.toggle('active',el.dataset.page===pg));
   document.getElementById('main').innerHTML = '<div class="loading">Loading…</div>';
   if (pg==='overview') renderOverview();
   else renderBot(pg);
