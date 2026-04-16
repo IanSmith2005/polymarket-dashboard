@@ -441,6 +441,8 @@ async function renderOverview() {
         <div class="hero-cap">
           ${pct!=null?(wp>=0?'+':'')+pct+'% return &nbsp;·&nbsp; ':''} Deposited $${dep.toFixed(2)} &nbsp;·&nbsp; Current ${tot!=null?'$'+tot.toFixed(2):'—'}
         </div>
+        ${d.poly_usdc!=null?`<div class="hero-cap" style="margin-top:6px;font-size:11px;color:var(--text3)">Poly USDC $${d.poly_usdc.toFixed(2)} &nbsp;+&nbsp; Positions $${(d.poly_positions||0).toFixed(2)} &nbsp;·&nbsp; Kalshi $${(d.kalshi_cash||0).toFixed(2)} &nbsp;+&nbsp; Positions $${(d.kalshi_positions||0).toFixed(2)}</div>`:''}
+
       </div>
       <div class="hero-div"></div>
       <div class="hero-stats">
