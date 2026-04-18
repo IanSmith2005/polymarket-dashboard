@@ -1,28 +1,28 @@
 {
   "bot": "btc_hourly",
   "status": "live",
-  "updated_at": "2026-04-18T14:50:06.977865+00:00",
+  "updated_at": "2026-04-18T15:05:07.027585+00:00",
   "wallets": {
     "poly_usdc": 74.6253,
-    "poly_positions": 4.1227,
+    "poly_positions": 4.8186,
     "kalshi_cash": 28.61,
-    "total": 107.358,
+    "total": 108.0539,
     "deposited": 81.34,
-    "wallet_pnl": 26.018,
-    "kalshi_positions": 0.0
+    "wallet_pnl": 26.7139,
+    "kalshi_positions": 0
   },
   "kpis": {
     "total_trades": 127,
-    "resolved": 124,
-    "wins": 120,
+    "resolved": 126,
+    "wins": 122,
     "losses": 4,
     "win_rate": 96.8,
     "both_filled_rate": 95.3,
     "avg_profit_pct_raw": 15.5,
-    "avg_pnl_per_trade": 0.2483,
-    "total_pnl_adjusted": 30.78,
+    "avg_pnl_per_trade": 0.2542,
+    "total_pnl_adjusted": 32.03,
     "full_hedge": 0,
-    "covered": 120,
+    "covered": 122,
     "loss": 4,
     "poly_only": 6
   },
@@ -646,6 +646,16 @@
       "ts": "2026-04-18T12:29:12.054766+00:00",
       "pnl_adjusted": 0.38,
       "cumulative": 30.785
+    },
+    {
+      "ts": "2026-04-18T13:05:04.637456+00:00",
+      "pnl_adjusted": 0.65,
+      "cumulative": 31.435
+    },
+    {
+      "ts": "2026-04-18T13:08:07.357859+00:00",
+      "pnl_adjusted": 0.6,
+      "cumulative": 32.035
     }
   ],
   "trades": [
@@ -680,11 +690,11 @@
       "units": 5,
       "poly_price": 0.42,
       "kalshi_price": 0.46,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "COVERED",
+      "pnl_adjusted": 0.6,
+      "pnl_raw": 0.6,
+      "resolved": true,
+      "outcome": "WIN",
       "kalshi_fees": 0.0,
       "poly_fill_s": null,
       "kalshi_fill_s": null
@@ -700,11 +710,11 @@
       "units": 5,
       "poly_price": 0.37,
       "kalshi_price": 0.5,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "COVERED",
+      "pnl_adjusted": 0.65,
+      "pnl_raw": 0.65,
+      "resolved": true,
+      "outcome": "WIN",
       "kalshi_fees": 0.0,
       "poly_fill_s": null,
       "kalshi_fill_s": null
