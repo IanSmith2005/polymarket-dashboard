@@ -1,41 +1,69 @@
 {
-  "updated_at": "2026-04-18T08:35:09.255072+00:00",
+  "updated_at": "2026-04-18T08:39:21.944125+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 76554.76,
-      "poly_up": 0.02,
-      "poly_down": 0.99,
+      "price": 76576.81,
+      "poly_up": 0.009,
+      "poly_down": 0.992,
       "poly_open": 76997.79,
-      "poly_question": "Bitcoin Up or Down - April 18, 4AM ET",
       "kalshi_levels": 188,
-      "opportunities": []
+      "trades": [
+        {
+          "direction": "UP + NO",
+          "kalshi_level": 77000.0,
+          "poly_price": 0.009,
+          "kalshi_price": 0.98,
+          "cost": 0.989,
+          "profit_pct": 1.1,
+          "dead_zone": 0.0,
+          "units": 5,
+          "deploy_dollars": 4.95,
+          "kalshi_vol": 57864.91,
+          "qualified": false,
+          "block_reason": "profit 1.1% < min 12%"
+        },
+        {
+          "direction": "DOWN + YES",
+          "qualified": false,
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
+        }
+      ]
     },
     {
       "asset": "ETH",
-      "price": 2375.82,
-      "poly_up": 0.007,
-      "poly_down": 0.994,
+      "price": 2373.57,
+      "poly_up": 0.005,
+      "poly_down": 0.996,
       "poly_open": 2403.71,
-      "poly_question": "Ethereum Up or Down - April 18, 4AM ET",
       "kalshi_levels": 75,
-      "opportunities": [
+      "trades": [
         {
-          "trade": "UP_Poly + NO_Kalshi",
+          "direction": "UP + NO",
           "kalshi_level": 2369.99,
-          "poly_open": 2403.71,
-          "eth_now": 2375.82,
+          "poly_price": 0.005,
+          "kalshi_price": 0.43,
+          "cost": 0.435,
+          "profit_pct": 129.9,
           "dead_zone": 33.72,
-          "cost": 0.737,
-          "profit_pct": 35.7,
-          "kalshi_yes": 0.93,
-          "kalshi_no": 0.73,
-          "poly_up": 0.007,
-          "poly_down": 0.994,
-          "kalshi_vol": 176.55,
-          "kalshi_close": "2026-04-18T09:00:00Z",
-          "poly_liq": 3695.38497,
-          "kalshi_ticker": "KXETHD-26APR1805-T2369.99"
+          "units": 5,
+          "deploy_dollars": 2.17,
+          "kalshi_vol": 220.79,
+          "qualified": true,
+          "block_reason": null
+        },
+        {
+          "direction": "DOWN + YES",
+          "qualified": false,
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         }
       ]
     }
