@@ -1,22 +1,22 @@
 {
   "bot": "eth_live",
   "status": "live",
-  "updated_at": "2026-04-18T19:50:07.336702+00:00",
+  "updated_at": "2026-04-18T20:05:07.522832+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 16,
+    "total_trades": 17,
     "resolved": 15,
     "wins": 14,
     "losses": 1,
     "win_rate": 93.3,
-    "both_filled_rate": 100.0,
+    "both_filled_rate": 94.1,
     "avg_profit_pct_raw": 21.4,
     "avg_pnl_per_trade": 0.382,
     "total_pnl_adjusted": 5.73,
     "full_hedge": 0,
     "covered": 14,
     "loss": 1,
-    "poly_only": 0
+    "poly_only": 1
   },
   "cumulative_pnl": [
     {
@@ -96,6 +96,26 @@
     }
   ],
   "trades": [
+    {
+      "ts": "2026-04-18T19:57:02.574617+00:00",
+      "trade": "UP_Poly + NO_Kalshi",
+      "cost": 0.86,
+      "profit_pct_raw": 16.3,
+      "dead_zone": 0,
+      "poly_ok": true,
+      "kalshi_ok": false,
+      "units": 5,
+      "poly_price": 0.55,
+      "kalshi_price": 0.31,
+      "hedge_type": "PENDING",
+      "pnl_adjusted": null,
+      "pnl_raw": null,
+      "resolved": false,
+      "outcome": null,
+      "kalshi_fees": 0.0,
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-04-18T19:35:08.307618+00:00",
       "trade": "DOWN_Poly + YES_Kalshi",
