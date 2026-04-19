@@ -295,7 +295,7 @@
       <div class="nav-lbl">Paper</div>
       <div class="nav-item" data-page="btc_15min" onclick="nav('btc_15min')">
         <div class="nav-ico">15</div> BTC 15-min
-        <span class="nav-badge paper">PAPER</span>
+        <span class="nav-badge live">LIVE</span>
       </div>
       <div class="nav-item" data-page="eth_dry_run" onclick="nav('eth_dry_run')">
         <div class="nav-ico">Ξ</div> ETH Dry Run
@@ -304,6 +304,10 @@
       <div class="nav-item" data-page="sol_dry_run" onclick="nav('sol_dry_run')">
         <div class="nav-ico">◎</div> SOL Hourly
         <span class="nav-badge paper">PAPER</span>
+      </div>
+      <div class="nav-lbl">Scanner</div>
+      <div class="nav-item" data-page="markets" onclick="nav('markets')">
+        <div class="nav-ico">⚡</div> Markets
       </div>
     </div>
     <div class="sb-foot">
@@ -328,6 +332,9 @@
       <div class="mob-item" data-page="sol_dry_run" onclick="nav('sol_dry_run')">
         <div class="mob-ico">◎</div>SOL
       </div>
+      <div class="mob-item" data-page="markets" onclick="nav('markets')">
+        <div class="mob-ico">⚡</div>Mkts
+      </div>
     </div>
   </div>
 
@@ -337,18 +344,19 @@
 </div>
 
 <script>
-const DATA = '/data';
+const DATA = 'https://raw.githubusercontent.com/IanSmith2005/polymarket-dashboard/main/data';
 
 const BOTS = {
   btc_hourly:  { label:'BTC Hourly Bot',  ico:'₿',  status:'live'  },
   eth_live:    { label:'ETH Hourly Bot',  ico:'Ξ',  status:'live'  },
-  btc_15min:   { label:'BTC 15-min Bot',  ico:'15', status:'paper' },
+  btc_15min:   { label:'BTC 15-min Bot',  ico:'15', status:'live'  },
   eth_dry_run: { label:'ETH Dry Run',     ico:'Ξ',  status:'paper' },
   sol_dry_run: { label:'SOL Hourly Bot',  ico:'◎',  status:'paper' },
 };
 
 let curPage = 'overview';
 let chartInst = null;
+let _mktTimer = null;
 
 async function load(f) {
   try {
@@ -621,19 +629,244 @@ function drawChart(cum, lastVal) {
   });
 }
 
+// ── Markets live fetch helpers ─────────────────────────────────────────────
+
+function etHourInfo() {
+  const now = new Date();
+  const parts = {};
+  new Intl.DateTimeFormat('en-US', {
+    timeZone:'America/New_York', hour12:false,
+    month:'long', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'
+  }).formatToParts(now).forEach(p => parts[p.type] = p.value);
+  const h24 = parseInt(parts.hour);
+  const h12 = h24 % 12 || 12;
+  const ampm = h24 < 12 ? 'am' : 'pm';
+  const month = parts.month.toLowerCase();
+  const nextH24 = (h24 + 1) % 24;
+  const nextH12 = nextH24 % 12 || 12;
+  const nextAmPm = nextH24 < 12 ? 'am' : 'pm';
+  // Close time = top of next ET hour
+  const closeEt = new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
+  closeEt.setMinutes(0,0,0);
+  const closeUTC = new Date(closeEt.getTime() + 3600000 + closeEt.getTimezoneOffset()*60000);
+  return {
+    btcSlug: `bitcoin-up-or-down-${month}-${parts.day}-${parts.year}-${h12}${ampm}-et`,
+    ethSlug: `ethereum-up-or-down-${month}-${parts.day}-${parts.year}-${h12}${ampm}-et`,
+    kalshiHourLabel: `at ${nextH12}${nextAmPm} edt`,
+    todayLabel: `${parts.month.slice(0,3).toLowerCase()} ${parseInt(parts.day)}`,
+    closeUTC,
+  };
+}
+
+async function mktFetch(url) {
+  const r = await fetch(url, {mode:'cors'});
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function fetchPolyAsset(slug) {
+  const gamma = await mktFetch(`https://gamma-api.polymarket.com/markets?slug=${slug}`);
+  if (!gamma?.length) return null;
+  const m = gamma[0];
+  const cid = m.conditionId;
+  if (!cid) return null;
+  const clob = await mktFetch(`https://clob.polymarket.com/markets/${cid}`);
+  const tokens = clob?.tokens || [];
+  const upTok  = tokens.find(t=>t.outcome?.toLowerCase()==='up')?.token_id;
+  const dnTok  = tokens.find(t=>t.outcome?.toLowerCase()==='down')?.token_id;
+  if (!upTok || !dnTok) return null;
+  const getAskAndDepth = async tok => {
+    const b = await mktFetch(`https://clob.polymarket.com/book?token_id=${tok}`);
+    const asks = (b?.asks||[]).sort((a,b)=>parseFloat(a.price)-parseFloat(b.price));
+    let cum=0, askPrice=null, depthAtAsk=0;
+    for (const a of asks) {
+      cum += parseFloat(a.size);
+      if (cum >= 5 && askPrice === null) { askPrice = parseFloat(a.price); depthAtAsk = cum; }
+    }
+    return { ask: askPrice, depth: Math.floor(depthAtAsk || cum) };
+  };
+  const [up, dn] = await Promise.all([getAskAndDepth(upTok), getAskAndDepth(dnTok)]);
+  return { upAsk: up.ask, upDepth: up.depth, dnAsk: dn.ask, dnDepth: dn.depth, question: m.question||'' };
+}
+
+async function fetchKalshiAsset(series, hourLabel, todayLabel) {
+  const ev = await mktFetch(`https://api.elections.kalshi.com/trade-api/v2/events?series_ticker=${series}&status=open&limit=20`);
+  const events = ev?.events || [];
+  let eventTicker = null;
+  for (const e of events) {
+    const title = (e.title||'').toLowerCase();
+    if (title.includes(hourLabel) && title.includes(todayLabel)) {
+      eventTicker = e.event_ticker; break;
+    }
+  }
+  if (!eventTicker) return null;
+  const mkts = await mktFetch(`https://api.elections.kalshi.com/trade-api/v2/markets?event_ticker=${eventTicker}&limit=200`);
+  return (mkts?.markets||[]).map(m => ({
+    ticker:    m.ticker,
+    threshold: parseFloat((m.subtitle||'').replace(/[^0-9.]/g,'')||0),
+    yesAsk:    parseFloat(m.yes_ask_dollars||0),
+    noAsk:     parseFloat(m.no_ask_dollars||0),
+    closeTime: m.close_time,
+  })).filter(m=>m.yesAsk>0&&m.noAsk>0);
+}
+
+function bestTrade(direction, polyP, kalshiP, polyOpen, thresh, depth=null, minProfit=12, maxDz=40, stake=2) {
+  const cost = round2(polyP + kalshiP);
+  if (cost >= 1) return null;
+  const profit = round2((1 - cost) / cost * 100);
+  const dz = polyOpen
+    ? (direction==='up' ? Math.max(0, round2(polyOpen - thresh))
+                        : Math.max(0, round2(thresh - polyOpen)))
+    : 0;
+  const botUnits = Math.max(5, Math.floor(stake / cost));
+  const depthUnits = depth != null ? Math.floor(depth) : null;
+  const units = depthUnits != null ? Math.min(botUnits, depthUnits) : botUnits;
+  const deploy = round2(units * cost);
+  const qualified = profit >= minProfit && dz <= maxDz;
+  const blockReason = qualified ? null
+    : dz > maxDz ? `DZ $${dz.toFixed(0)} > max $${maxDz}`
+    : `profit ${profit.toFixed(1)}% < min ${minProfit}%`;
+  return { cost, profit, dz, units, deploy, depthUnits, qualified, blockReason };
+}
+
+function round2(v) { return Math.round(v*100)/100; }
+
+async function renderMarkets() {
+  if (_mktTimer) { clearInterval(_mktTimer); _mktTimer = null; }
+  document.getElementById('main').innerHTML = `
+    <div class="pg-hdr"><div class="pg-title">Markets</div><div class="pg-meta">Fetching live data…</div></div>
+    <div class="loading" style="height:300px">Connecting to Polymarket · Kalshi · Binance…</div>`;
+  await _doMarketsFetch();
+  _mktTimer = setInterval(()=>{ if(curPage==='markets') _doMarketsFetch(); }, 60000);
+}
+
+async function _doMarketsFetch() {
+  const info = etHourInfo();
+
+  // Kalshi data from markets.json (Pi every 15min). Binance price live.
+  const [mktJson, btcPrice, ethPrice] = await Promise.allSettled([
+    load('markets'),
+    mktFetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT').then(d=>parseFloat(d.price)),
+    mktFetch('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT').then(d=>parseFloat(d.price)),
+  ]);
+
+  const val  = r => r.status==='fulfilled' ? r.value : null;
+  const mkts = val(mktJson);
+  const btcP = val(btcPrice), ethP = val(ethPrice);
+
+  // For each asset find the nearest Kalshi level to the current live price
+  function bestForAsset(assetName, livePrice) {
+    const a = mkts?.assets?.find(x => x.asset === assetName);
+    if (!a) return null;
+
+    // Use raw levels list (all levels) to find truly nearest to live price
+    const raw = a.kalshi_raw || [];
+    let nearest = null;
+    if (raw.length && livePrice != null) {
+      nearest = raw.reduce((best, km) =>
+        !best || Math.abs(livePrice - km.t) < Math.abs(livePrice - best.t) ? km : best, null);
+    }
+
+    const thresh = nearest?.t ?? a.trades?.[0]?.kalshi_level ?? null;
+    if (thresh == null) return null;
+
+    const dz = livePrice != null ? Math.max(0, round2(Math.abs(livePrice - thresh))) : 0;
+
+    // Use the Pi's pre-computed best trade for deploy/qualification (includes profit check)
+    const bestTrade = a.trades?.find(t => t.qualified) || a.trades?.[0];
+    const units  = bestTrade?.units ?? 5;
+    const deploy = bestTrade?.deploy_dollars ?? round2(units * (bestTrade?.cost ?? 0.9));
+    const qualified   = dz <= 40 && (bestTrade?.qualified ?? false);
+    const blockReason = dz > 40 ? `Dead zone $${dz.toFixed(0)} > max $40`
+      : !bestTrade?.qualified ? (bestTrade?.block_reason || 'blocked by bot settings')
+      : null;
+
+    return { thresh, dz, units, deploy, qualified, blockReason, closeTime: bestTrade?.close_time };
+  }
+
+  const btcBest = bestForAsset('BTC', btcP);
+  const ethBest = bestForAsset('ETH', ethP);
+
+  const mktAge = mkts?.updated_at
+    ? Math.round((Date.now() - new Date(mkts.updated_at)) / 60000) + 'min ago'
+    : 'no data';
+
+  const closeStr = info.closeUTC
+    ? info.closeUTC.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'America/New_York'})+' ET'
+    : '—';
+
+  function assetCard(assetName, price, b) {
+    const p$ = price ? '$'+Math.round(price).toLocaleString() : '—';
+    if (!b) return `
+    <div class="card" style="margin-bottom:14px">
+      <div style="font-size:18px;font-weight:900">${assetName} Hourly</div>
+      <div style="margin-top:12px;color:var(--text3);font-size:13px">No Kalshi data yet — waiting for Pi sync</div>
+    </div>`;
+
+    const dzC   = b.dz <= 15 ? 'var(--green)' : b.dz <= 30 ? 'var(--yellow)' : 'var(--red)';
+    const dzStr = '$' + b.dz.toFixed(0);
+    const deplStr = `$${b.deploy.toFixed(2)} · ${b.units} units`;
+
+    return `
+    <div class="card" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+        <div style="font-size:20px;font-weight:900">${assetName} Hourly</div>
+        <div style="font-size:13px;color:var(--text3)">
+          <span style="color:var(--text);font-weight:700">${p$}</span>
+          &nbsp;·&nbsp; closes ${closeStr}
+        </div>
+        <div class="badge ${b.qualified?'fh':'ls'}" style="margin-left:auto">${b.qualified?'LIVE':'BLOCKED'}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px">
+        <div>
+          <div style="font-size:9px;color:var(--text3);margin-bottom:6px;letter-spacing:.08em">NEAREST KALSHI STRIKE</div>
+          <div style="font-size:22px;font-weight:800">$${(b.thresh||0).toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--text3);margin-bottom:6px;letter-spacing:.08em">DEAD ZONE</div>
+          <div style="font-size:22px;font-weight:800;color:${dzC}">${dzStr}</div>
+          ${!b.qualified ? `<div style="font-size:11px;color:var(--red);margin-top:4px">${b.blockReason}</div>` : ''}
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--text3);margin-bottom:6px;letter-spacing:.08em">BOT WOULD DEPLOY</div>
+          <div style="font-size:22px;font-weight:800;color:${b.qualified?'var(--green)':'var(--text3)'}">${deplStr}</div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--text3);margin-bottom:6px;letter-spacing:.08em">WINDOW</div>
+          <div style="font-size:14px;font-weight:700">closes ${closeStr}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px">Kalshi ${mktAge}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  const liveCount = [btcBest, ethBest].filter(b => b?.qualified).length;
+  const now = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  document.getElementById('main').innerHTML = `
+    <div class="pg-hdr">
+      <div class="pg-title">Markets</div>
+      <div class="pill ${liveCount>0?'live':'paper'}">${liveCount} LIVE</div>
+      <div class="pg-meta">refreshes 60s · last ${now}</div>
+    </div>
+    ${assetCard('BTC', btcP, btcBest)}
+    ${assetCard('ETH', ethP, ethBest)}`;
+}
+
 function nav(pg) {
+  if (pg !== 'markets' && _mktTimer) { clearInterval(_mktTimer); _mktTimer = null; }
   curPage = pg;
   window.location.hash = '#/'+pg.replace(/_/g,'-');
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active',el.dataset.page===pg));
   document.querySelectorAll('.mob-item').forEach(el=>el.classList.toggle('active',el.dataset.page===pg));
   document.getElementById('main').innerHTML = '<div class="loading">Loading…</div>';
   if (pg==='overview') renderOverview();
+  else if (pg==='markets') renderMarkets();
   else renderBot(pg);
 }
 
 function handleHash() {
   const h = window.location.hash.replace('#/','').replace(/-/g,'_').replace('#','');
-  const valid = ['overview','btc_hourly','eth_live','btc_15min','eth_dry_run','sol_dry_run'];
+  const valid = ['overview','btc_hourly','eth_live','btc_15min','eth_dry_run','sol_dry_run','markets'];
   nav(valid.includes(h)?h:'overview');
 }
 
