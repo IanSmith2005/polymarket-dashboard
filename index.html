@@ -283,11 +283,13 @@ async function renderOverview() {
   const polyTotal   = (d.poly_usdc || 0) + (d.poly_positions || 0);
   const kalshiTotal = (d.kalshi_cash || 0) + (d.kalshi_positions || 0);
 
-  // Build rebuild chart points: baseline + cumulative trade pnl
+  // Build rebuild chart points: baseline + cumulative trade pnl, filtered to post-rebuild only
   const cum = d.combined_cumulative_pnl || [];
   const chartPoints = [{ ts: since + 'T00:00:00Z', y: baseline }];
   for (const pt of cum) {
-    chartPoints.push({ ts: pt.ts, y: parseFloat((baseline + pt.cumulative).toFixed(2)) });
+    if (pt.ts >= since) {
+      chartPoints.push({ ts: pt.ts, y: parseFloat((baseline + pt.cumulative).toFixed(2)) });
+    }
   }
 
   document.getElementById('main').innerHTML = `
