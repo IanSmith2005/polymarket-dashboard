@@ -161,15 +161,20 @@
       <div class="nav-item active" data-page="overview" onclick="nav('overview')">
         <div class="nav-ico">⊞</div> Overview
       </div>
-      <div class="nav-item" data-page="bot" onclick="nav('bot')">
+      <div class="nav-item" data-page="btc_hourly" onclick="nav('btc_hourly')">
+        <div class="nav-ico">₿</div> BTC Hourly
+        <span class="nav-badge live">LIVE</span>
+      </div>
+      <div class="nav-item" data-page="eth_hourly" onclick="nav('eth_hourly')">
+        <div class="nav-ico">Ξ</div> ETH Hourly
+        <span class="nav-badge live">LIVE</span>
+      </div>
+      <div class="nav-item" data-page="btc_15min" onclick="nav('btc_15min')">
         <div class="nav-ico">15</div> BTC 15-min
         <span class="nav-badge live">LIVE</span>
       </div>
       <div class="nav-item" data-page="markets" onclick="nav('markets')">
         <div class="nav-ico">⚡</div> Markets
-      </div>
-      <div class="nav-item" data-page="history" onclick="nav('history')">
-        <div class="nav-ico">📁</div> History
       </div>
     </div>
     <div class="sb-foot">
@@ -182,14 +187,17 @@
       <div class="mob-item active" data-page="overview" onclick="nav('overview')">
         <div class="mob-ico">⊞</div>Overview
       </div>
-      <div class="mob-item" data-page="bot" onclick="nav('bot')">
-        <div class="mob-ico">15</div>Bot
+      <div class="mob-item" data-page="btc_hourly" onclick="nav('btc_hourly')">
+        <div class="mob-ico">₿</div>BTC H
+      </div>
+      <div class="mob-item" data-page="eth_hourly" onclick="nav('eth_hourly')">
+        <div class="mob-ico">Ξ</div>ETH H
+      </div>
+      <div class="mob-item" data-page="btc_15min" onclick="nav('btc_15min')">
+        <div class="mob-ico">15</div>15-min
       </div>
       <div class="mob-item" data-page="markets" onclick="nav('markets')">
         <div class="mob-ico">⚡</div>Markets
-      </div>
-      <div class="mob-item" data-page="history" onclick="nav('history')">
-        <div class="mob-ico">📁</div>History
       </div>
     </div>
   </div>
@@ -337,15 +345,27 @@ async function renderOverview() {
         <div class="bal-val">$${kalshiTotal.toFixed(2)}</div>
         <div class="bal-sub">Cash $${(d.kalshi_cash||0).toFixed(2)} · Positions $${(d.kalshi_positions||0).toFixed(2)}</div>
       </div>
+    </div>
+
+    <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+      ${(d.bots||[]).filter(b=>['btc_hourly','eth_live','btc_15min'].includes(b.id)).map(b => {
+        const label = b.id==='btc_hourly' ? 'BTC Hourly' : b.id==='eth_live' ? 'ETH Hourly' : 'BTC 15-min';
+        const page  = b.id==='btc_hourly' ? 'btc_hourly' : b.id==='eth_live' ? 'eth_hourly' : 'btc_15min';
+        return `<div class="kpi-card" style="cursor:pointer" onclick="nav('${page}')">
+          <div class="kpi-lbl">${label}</div>
+          <div class="kpi-val ${b.trade_pnl>=0?'pos':'neg'}">${signed(b.trade_pnl)}</div>
+          <div class="kpi-sub">${b.win_rate.toFixed(1)}% win rate · ${b.trades} trades</div>
+        </div>`;
+      }).join('')}
     </div>`;
 
   drawChart('rebuildChart', chartPoints, 'purple');
 }
 
-// ── BTC 15-min Bot ───────────────────────────────────────────────────────────
+// ── Bot page (shared renderer) ───────────────────────────────────────────────
 
-async function renderBot() {
-  const d = await load('btc_15min');
+async function renderBotPage(dataKey, title) {
+  const d = await load(dataKey);
   if (!d) { document.getElementById('main').innerHTML = '<div class="loading">Failed to load</div>'; return; }
 
   const k   = d.kpis;
@@ -353,7 +373,7 @@ async function renderBot() {
   const lastPnl = cum.length ? cum[cum.length - 1].cumulative : 0;
   const chartPts = cum.map(p => ({ ts: p.ts, y: p.cumulative }));
 
-  const rows = (d.trades || []).slice(0, 20).map(t => {
+  const rows = (d.trades || []).slice(0, 30).map(t => {
     const dir = t.trade.includes('UP') ? '▲ UP + NO' : '▼ DOWN + YES';
     const outcome = !t.resolved ? '<span class="badge pend">Pending</span>'
       : t.outcome === 'WIN' ? '<span class="badge win">Win</span>'
@@ -372,7 +392,7 @@ async function renderBot() {
 
   document.getElementById('main').innerHTML = `
     <div class="pg-hdr">
-      <div class="pg-title">BTC 15-min Bot</div>
+      <div class="pg-title">${title}</div>
       <div class="pill live">LIVE</div>
       <div class="pg-meta">Updated ${fts(d.updated_at)}</div>
     </div>
@@ -414,7 +434,7 @@ async function renderBot() {
         <table class="log-tbl">
           <thead><tr>
             <th>Time</th><th>Direction</th><th>Size</th>
-            <th>Dead Zone</th><th>Profit</th><th>Outcome</th><th>P&L</th>
+            <th>Dead Zone</th><th>Profit %</th><th>Outcome</th><th>P&L</th>
           </tr></thead>
           <tbody>${rows || '<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">No trades yet</td></tr>'}</tbody>
         </table>
@@ -521,57 +541,6 @@ async function doMarketsFetch() {
     ${card}`;
 }
 
-// ── History ──────────────────────────────────────────────────────────────────
-
-async function renderHistory() {
-  const [btcH, ethL] = await Promise.all([load('btc_hourly'), load('eth_live')]);
-
-  const archivedBots = [
-    { name: 'BTC Hourly', note: 'Disabled — concurrent bug caused wallet loss', data: btcH, since: 'Post-fix only (2026-04-21+)' },
-    { name: 'ETH Hourly', note: 'Disabled — clean, re-enable after rebuild', data: ethL, since: 'All-time' },
-  ];
-
-  const rows = archivedBots.map(b => {
-    const k = b.data?.kpis;
-    if (!k) return `<tr>
-      <td><div class="hist-name">${b.name}</div><div class="hist-note">${b.note}</div></td>
-      <td colspan="4" style="color:var(--text3)">No data</td>
-    </tr>`;
-    return `<tr>
-      <td><div class="hist-name">${b.name}</div><div class="hist-note">${b.note}</div></td>
-      <td style="font-weight:700">${k.total_trades}</td>
-      <td style="font-weight:700">${k.win_rate.toFixed(1)}%</td>
-      <td class="${k.total_pnl_adjusted >= 0 ? 'pnl-pos' : 'pnl-neg'}">${signed(k.total_pnl_adjusted)}</td>
-      <td style="color:var(--text3)">${b.since}</td>
-    </tr>`;
-  }).join('');
-
-  document.getElementById('main').innerHTML = `
-    <div class="pg-hdr">
-      <div class="pg-title">History</div>
-    </div>
-
-    <div class="log-wrap" style="margin-bottom:16px">
-      <div class="log-hdr">
-        <div class="log-ttl">Archived Bots</div>
-      </div>
-      <table class="hist-table">
-        <thead><tr>
-          <th>Bot</th><th>Trades</th><th>Win Rate</th><th>Total P&L</th><th>Period</th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-
-    <div class="card">
-      <div class="card-ttl">All-Time Summary</div>
-      <div class="stat-row"><span class="lbl">BTC Hourly (172 post-fix trades)</span><span class="val pnl-pos">+$68.89 · 97.1% win rate</span></div>
-      <div class="stat-row"><span class="lbl">ETH Hourly (42 trades)</span><span class="val pnl-pos">+$19.63 · 95.2% win rate</span></div>
-      <div class="stat-row"><span class="lbl">BTC 15-min (20 pre-rebuild trades)</span><span class="val pnl-pos">+$44.46 · 100% win rate</span></div>
-      <div class="stat-row"><span class="lbl">Total deposited</span><span class="val">$174.34</span></div>
-      <div class="stat-row"><span class="lbl">Rebuild started</span><span class="val">2026-04-21 (wallet at $23.04)</span></div>
-    </div>`;
-}
 
 // ── Navigation ───────────────────────────────────────────────────────────────
 
@@ -582,23 +551,26 @@ function nav(pg) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page === pg));
   document.querySelectorAll('.mob-item').forEach(el => el.classList.toggle('active', el.dataset.page === pg));
   document.getElementById('main').innerHTML = '<div class="loading">Loading…</div>';
-  if (pg === 'overview') renderOverview();
-  else if (pg === 'bot') renderBot();
-  else if (pg === 'markets') renderMarkets();
-  else if (pg === 'history') renderHistory();
+  if      (pg === 'overview')   renderOverview();
+  else if (pg === 'btc_hourly') renderBotPage('btc_hourly', 'BTC Hourly');
+  else if (pg === 'eth_hourly') renderBotPage('eth_live',   'ETH Hourly');
+  else if (pg === 'btc_15min')  renderBotPage('btc_15min',  'BTC 15-min');
+  else if (pg === 'markets')    renderMarkets();
 }
 
 function handleHash() {
   const h = window.location.hash.replace('#/', '').replace('#', '');
-  const valid = ['overview', 'bot', 'markets', 'history'];
+  const valid = ['overview', 'btc_hourly', 'eth_hourly', 'btc_15min', 'markets'];
   nav(valid.includes(h) ? h : 'overview');
 }
 
 window.addEventListener('hashchange', handleHash);
 handleHash();
 setInterval(() => {
-  if (curPage === 'overview') renderOverview();
-  else if (curPage === 'bot') renderBot();
+  if      (curPage === 'overview')   renderOverview();
+  else if (curPage === 'btc_hourly') renderBotPage('btc_hourly', 'BTC Hourly');
+  else if (curPage === 'eth_hourly') renderBotPage('eth_live',   'ETH Hourly');
+  else if (curPage === 'btc_15min')  renderBotPage('btc_15min',  'BTC 15-min');
 }, 300000);
 </script>
 </body>
