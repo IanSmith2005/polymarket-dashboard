@@ -1,21 +1,21 @@
 {
   "bot": "eth_live",
   "status": "live",
-  "updated_at": "2026-04-27T07:50:07.734935+00:00",
+  "updated_at": "2026-04-27T08:05:06.689642+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 54,
-    "resolved": 52,
+    "total_trades": 55,
+    "resolved": 53,
     "wins": 49,
-    "losses": 3,
-    "win_rate": 94.2,
-    "both_filled_rate": 94.4,
-    "avg_profit_pct_raw": 22.3,
-    "avg_pnl_per_trade": 0.4263,
-    "total_pnl_adjusted": 22.17,
+    "losses": 4,
+    "win_rate": 92.5,
+    "both_filled_rate": 94.5,
+    "avg_profit_pct_raw": 22.4,
+    "avg_pnl_per_trade": 0.3428,
+    "total_pnl_adjusted": 18.17,
     "full_hedge": 2,
     "covered": 47,
-    "loss": 3,
+    "loss": 4,
     "poly_only": 3
   },
   "cumulative_pnl": [
@@ -278,9 +278,34 @@
       "ts": "2026-04-26T23:17:12.664682+00:00",
       "pnl_adjusted": 1.0,
       "cumulative": 22.1686
+    },
+    {
+      "ts": "2026-04-27T06:44:00.594805+00:00",
+      "pnl_adjusted": -4.0,
+      "cumulative": 18.1686
     }
   ],
   "trades": [
+    {
+      "ts": "2026-04-27T07:53:07.517597+00:00",
+      "trade": "UP_Poly + NO_Kalshi",
+      "cost": 0.81,
+      "profit_pct_raw": 23.5,
+      "dead_zone": 1.01,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.5,
+      "kalshi_price": 0.31,
+      "hedge_type": "PENDING",
+      "pnl_adjusted": null,
+      "pnl_raw": null,
+      "resolved": false,
+      "outcome": null,
+      "kalshi_fees": 0.0,
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-04-27T07:43:36.997271+00:00",
       "trade": "UP_Poly + NO_Kalshi",
@@ -312,11 +337,11 @@
       "units": 5,
       "poly_price": 0.31,
       "kalshi_price": 0.49,
-      "hedge_type": "PENDING",
-      "pnl_adjusted": null,
-      "pnl_raw": null,
-      "resolved": false,
-      "outcome": null,
+      "hedge_type": "LOSS",
+      "pnl_adjusted": -4.0,
+      "pnl_raw": -4.0,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "kalshi_fees": 0.0,
       "poly_fill_s": null,
       "kalshi_fill_s": null
