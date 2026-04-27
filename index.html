@@ -277,8 +277,7 @@ async function renderOverview() {
   const total    = d.total || 0;
   const baseline = d.rebuild_baseline || 23.035;
   const since    = d.rebuild_since || '2026-04-21';
-  const tradePnl = d.rebuild_trade_pnl || 0;
-  const rebuildVal = baseline + tradePnl;
+  const gainSince = total - baseline;
 
   const polyTotal   = (d.poly_usdc || 0) + (d.poly_positions || 0);
   const kalshiTotal = (d.kalshi_cash || 0) + (d.kalshi_positions || 0);
@@ -300,19 +299,19 @@ async function renderOverview() {
 
     <div class="hero">
       <div class="hero-eye">Total Wallet · Rebuild since ${since}</div>
-      <div class="hero-num ${rebuildVal >= baseline ? 'pos' : 'neg'}">$${rebuildVal.toFixed(2)}</div>
+      <div class="hero-num ${total >= baseline ? 'pos' : 'neg'}">$${total.toFixed(2)}</div>
       <div class="hero-row">
         <div class="hero-stat">
-          <div class="val" style="color:var(--green)">${signed(tradePnl)}</div>
-          <div class="lbl">Trade P&L since reset</div>
+          <div class="val ${gainSince >= 0 ? 'pos' : 'neg'}" style="color:${gainSince >= 0 ? 'var(--green)' : 'var(--red)'}">${signed(gainSince)}</div>
+          <div class="lbl">Since baseline (${since})</div>
         </div>
         <div class="hero-stat">
-          <div class="val">$${baseline.toFixed(2)}</div>
-          <div class="lbl">Baseline (${since})</div>
+          <div class="val">$${polyTotal.toFixed(2)}</div>
+          <div class="lbl">Polymarket</div>
         </div>
         <div class="hero-stat">
-          <div class="val">$${d.deposited ? d.deposited.toFixed(2) : '—'}</div>
-          <div class="lbl">Total deposited</div>
+          <div class="val">$${kalshiTotal.toFixed(2)}</div>
+          <div class="lbl">Kalshi</div>
         </div>
       </div>
     </div>
@@ -321,7 +320,7 @@ async function renderOverview() {
       <div class="chart-hdr">
         <div>
           <div class="chart-ttl">Wallet rebuild</div>
-          <div class="chart-num ${rebuildVal >= baseline ? 'pos' : ''}">${'$'+rebuildVal.toFixed(2)}</div>
+          <div class="chart-num ${total >= baseline ? 'pos' : ''}">${'$'+total.toFixed(2)}</div>
         </div>
       </div>
       <canvas id="rebuildChart" height="80"></canvas>
