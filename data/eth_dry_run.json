@@ -1,21 +1,21 @@
 {
   "bot": "eth_dry_run",
   "status": "paper",
-  "updated_at": "2026-04-30T14:50:06.750371+00:00",
+  "updated_at": "2026-04-30T15:05:07.929022+00:00",
   "wallets": {},
   "kpis": {
     "total_trades": 65,
-    "resolved": 63,
+    "resolved": 65,
     "wins": 54,
-    "losses": 9,
-    "win_rate": 85.7,
+    "losses": 11,
+    "win_rate": 83.1,
     "both_filled_rate": 100.0,
-    "avg_profit_pct_raw": 16.2,
-    "avg_pnl_per_trade": -0.027,
-    "total_pnl_adjusted": -1.7,
+    "avg_profit_pct_raw": 16.1,
+    "avg_pnl_per_trade": -0.1631,
+    "total_pnl_adjusted": -10.6,
     "full_hedge": 0,
     "covered": 0,
-    "loss": 9,
+    "loss": 11,
     "poly_only": 0
   },
   "cumulative_pnl": [
@@ -333,6 +333,16 @@
       "ts": "2026-04-30T13:17:59.234969+00:00",
       "pnl_adjusted": -4.3,
       "cumulative": -1.7
+    },
+    {
+      "ts": "2026-04-30T14:30:18.526049+00:00",
+      "pnl_adjusted": -4.5,
+      "cumulative": -6.2
+    },
+    {
+      "ts": "2026-04-30T14:30:52.598694+00:00",
+      "pnl_adjusted": -4.4,
+      "cumulative": -10.6
     }
   ],
   "trades": [
@@ -347,10 +357,10 @@
       "units": 5,
       "poly_price": 0.26,
       "kalshi_price": 0.6,
-      "pnl_adjusted": null,
+      "pnl_adjusted": -4.4,
       "kalshi_fees": 0,
-      "resolved": false,
-      "outcome": null,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "poly_fill_s": null,
       "kalshi_fill_s": null
     },
@@ -365,10 +375,10 @@
       "units": 5,
       "poly_price": 0.26,
       "kalshi_price": 0.62,
-      "pnl_adjusted": null,
+      "pnl_adjusted": -4.5,
       "kalshi_fees": 0,
-      "resolved": false,
-      "outcome": null,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "poly_fill_s": null,
       "kalshi_fill_s": null
     },
