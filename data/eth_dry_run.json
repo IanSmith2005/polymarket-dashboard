@@ -1,18 +1,18 @@
 {
   "bot": "eth_dry_run",
   "status": "paper",
-  "updated_at": "2026-04-30T19:50:06.786999+00:00",
+  "updated_at": "2026-04-30T20:05:08.853092+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 71,
-    "resolved": 71,
-    "wins": 56,
+    "total_trades": 73,
+    "resolved": 73,
+    "wins": 58,
     "losses": 15,
-    "win_rate": 78.9,
+    "win_rate": 79.5,
     "both_filled_rate": 100.0,
     "avg_profit_pct_raw": 16.2,
-    "avg_pnl_per_trade": -0.3676,
-    "total_pnl_adjusted": -26.1,
+    "avg_pnl_per_trade": -0.339,
+    "total_pnl_adjusted": -24.75,
     "full_hedge": 0,
     "covered": 0,
     "loss": 15,
@@ -373,9 +373,55 @@
       "ts": "2026-04-30T18:19:20.943178+00:00",
       "pnl_adjusted": -4.5,
       "cumulative": -26.1
+    },
+    {
+      "ts": "2026-04-30T19:53:17.938646+00:00",
+      "pnl_adjusted": 0.65,
+      "cumulative": -25.45
+    },
+    {
+      "ts": "2026-04-30T19:53:31.332234+00:00",
+      "pnl_adjusted": 0.7,
+      "cumulative": -24.75
     }
   ],
   "trades": [
+    {
+      "ts": "2026-04-30T19:53:31.332234+00:00",
+      "trade": "DOWN_Poly + YES_Kalshi",
+      "cost": 0.86,
+      "profit_pct_raw": 16.3,
+      "dead_zone": 0.16,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.09,
+      "kalshi_price": 0.75,
+      "pnl_adjusted": 0.7,
+      "kalshi_fees": 0,
+      "resolved": true,
+      "outcome": "WIN",
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
+    {
+      "ts": "2026-04-30T19:53:17.938646+00:00",
+      "trade": "DOWN_Poly + YES_Kalshi",
+      "cost": 0.87,
+      "profit_pct_raw": 14.9,
+      "dead_zone": 0.16,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.09,
+      "kalshi_price": 0.76,
+      "pnl_adjusted": 0.65,
+      "kalshi_fees": 0,
+      "resolved": true,
+      "outcome": "WIN",
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-04-30T18:19:20.943178+00:00",
       "trade": "DOWN_Poly + YES_Kalshi",
