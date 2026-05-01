@@ -1,18 +1,18 @@
 {
   "bot": "eth_dry_run",
   "status": "paper",
-  "updated_at": "2026-05-01T01:50:06.780650+00:00",
+  "updated_at": "2026-05-01T02:05:08.927400+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 84,
-    "resolved": 82,
-    "wins": 65,
+    "total_trades": 85,
+    "resolved": 84,
+    "wins": 67,
     "losses": 17,
-    "win_rate": 79.3,
+    "win_rate": 79.8,
     "both_filled_rate": 100.0,
     "avg_profit_pct_raw": 17.1,
-    "avg_pnl_per_trade": -0.322,
-    "total_pnl_adjusted": -26.4,
+    "avg_pnl_per_trade": -0.3,
+    "total_pnl_adjusted": -25.2,
     "full_hedge": 0,
     "covered": 0,
     "loss": 17,
@@ -428,9 +428,37 @@
       "ts": "2026-05-01T00:08:49.460835+00:00",
       "pnl_adjusted": 1.1,
       "cumulative": -26.4
+    },
+    {
+      "ts": "2026-05-01T01:33:36.044617+00:00",
+      "pnl_adjusted": 0.6,
+      "cumulative": -25.8
+    },
+    {
+      "ts": "2026-05-01T01:33:42.996777+00:00",
+      "pnl_adjusted": 0.6,
+      "cumulative": -25.2
     }
   ],
   "trades": [
+    {
+      "ts": "2026-05-01T02:04:05.233011+00:00",
+      "trade": "UP_Poly + NO_Kalshi",
+      "cost": 0.57,
+      "profit_pct_raw": 75.4,
+      "dead_zone": 7.75,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.46,
+      "kalshi_price": 0.09,
+      "pnl_adjusted": null,
+      "kalshi_fees": 0,
+      "resolved": false,
+      "outcome": null,
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-05-01T01:33:42.996777+00:00",
       "trade": "DOWN_Poly + YES_Kalshi",
@@ -442,10 +470,10 @@
       "units": 5,
       "poly_price": 0.22,
       "kalshi_price": 0.64,
-      "pnl_adjusted": null,
+      "pnl_adjusted": 0.6,
       "kalshi_fees": 0,
-      "resolved": false,
-      "outcome": null,
+      "resolved": true,
+      "outcome": "WIN",
       "poly_fill_s": null,
       "kalshi_fill_s": null
     },
@@ -460,10 +488,10 @@
       "units": 5,
       "poly_price": 0.22,
       "kalshi_price": 0.64,
-      "pnl_adjusted": null,
+      "pnl_adjusted": 0.6,
       "kalshi_fees": 0,
-      "resolved": false,
-      "outcome": null,
+      "resolved": true,
+      "outcome": "WIN",
       "poly_fill_s": null,
       "kalshi_fill_s": null
     },
