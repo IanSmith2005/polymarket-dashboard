@@ -1,26 +1,26 @@
 {
   "bot": "btc_hourly",
   "status": "live",
-  "updated_at": "2026-05-02T18:35:06.974026+00:00",
+  "updated_at": "2026-05-02T18:50:06.992839+00:00",
   "wallets": {
     "poly_usdc": 50.0,
-    "poly_positions": 8.0874,
-    "kalshi_cash": 50.85,
-    "total": 108.9374,
+    "poly_positions": 6.5875,
+    "kalshi_cash": 41.4,
+    "total": 97.9875,
     "deposited": 174.34,
-    "wallet_pnl": -65.4026,
+    "wallet_pnl": -76.3525,
     "rebuild_baseline": 56.16,
     "rebuild_since": "2026-04-22",
     "rebuild_pnl": null,
     "kalshi_positions": 0.0
   },
   "kpis": {
-    "total_trades": 35,
+    "total_trades": 36,
     "resolved": 35,
     "wins": 31,
     "losses": 4,
     "win_rate": 88.6,
-    "both_filled_rate": 91.4,
+    "both_filled_rate": 91.7,
     "avg_profit_pct_raw": 19.8,
     "avg_pnl_per_trade": 1.3146,
     "total_pnl_adjusted": 46.01,
@@ -207,6 +207,24 @@
     }
   ],
   "trades": [
+    {
+      "ts": "2026-05-02T18:39:16.401350+00:00",
+      "trade": "DOWN_Poly + YES_Kalshi",
+      "cost": 0.8,
+      "profit_pct_raw": 25.0,
+      "dead_zone": 1.97,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 15,
+      "poly_price": 0.19,
+      "kalshi_price": 0.61,
+      "pnl_adjusted": null,
+      "kalshi_fees": 0,
+      "resolved": false,
+      "outcome": null,
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-05-02T16:18:32.990931+00:00",
       "trade": "UP_Poly + NO_Kalshi",
