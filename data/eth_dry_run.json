@@ -1,21 +1,21 @@
 {
   "bot": "eth_dry_run",
   "status": "paper",
-  "updated_at": "2026-05-03T04:50:06.672792+00:00",
+  "updated_at": "2026-05-03T05:05:06.989115+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 152,
-    "resolved": 151,
+    "total_trades": 153,
+    "resolved": 153,
     "wins": 117,
-    "losses": 34,
-    "win_rate": 77.5,
+    "losses": 36,
+    "win_rate": 76.5,
     "both_filled_rate": 100.0,
-    "avg_profit_pct_raw": 25.5,
-    "avg_pnl_per_trade": -0.2003,
-    "total_pnl_adjusted": -30.25,
+    "avg_profit_pct_raw": 25.4,
+    "avg_pnl_per_trade": -0.2529,
+    "total_pnl_adjusted": -38.7,
     "full_hedge": 0,
     "covered": 0,
-    "loss": 34,
+    "loss": 36,
     "poly_only": 0
   },
   "cumulative_pnl": [
@@ -773,9 +773,37 @@
       "ts": "2026-05-03T02:04:35.966096+00:00",
       "pnl_adjusted": 1.55,
       "cumulative": -30.25
+    },
+    {
+      "ts": "2026-05-03T04:49:09.731765+00:00",
+      "pnl_adjusted": -4.45,
+      "cumulative": -34.7
+    },
+    {
+      "ts": "2026-05-03T04:52:49.778222+00:00",
+      "pnl_adjusted": -4.0,
+      "cumulative": -38.7
     }
   ],
   "trades": [
+    {
+      "ts": "2026-05-03T04:52:49.778222+00:00",
+      "trade": "UP_Poly + NO_Kalshi",
+      "cost": 0.8,
+      "profit_pct_raw": 25.0,
+      "dead_zone": 1.9,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.65,
+      "kalshi_price": 0.13,
+      "pnl_adjusted": -4.0,
+      "kalshi_fees": 0,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-05-03T04:49:09.731765+00:00",
       "trade": "UP_Poly + NO_Kalshi",
@@ -787,10 +815,10 @@
       "units": 5,
       "poly_price": 0.65,
       "kalshi_price": 0.22,
-      "pnl_adjusted": null,
+      "pnl_adjusted": -4.45,
       "kalshi_fees": 0,
-      "resolved": false,
-      "outcome": null,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
       "poly_fill_s": null,
       "kalshi_fill_s": null
     },
