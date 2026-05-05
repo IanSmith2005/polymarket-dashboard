@@ -1,21 +1,21 @@
 {
   "bot": "eth_dry_run",
   "status": "paper",
-  "updated_at": "2026-05-05T13:50:06.439697+00:00",
+  "updated_at": "2026-05-05T14:05:06.818507+00:00",
   "wallets": {},
   "kpis": {
-    "total_trades": 216,
-    "resolved": 216,
+    "total_trades": 218,
+    "resolved": 218,
     "wins": 167,
-    "losses": 49,
-    "win_rate": 77.3,
+    "losses": 51,
+    "win_rate": 76.6,
     "both_filled_rate": 100.0,
-    "avg_profit_pct_raw": 25.1,
-    "avg_pnl_per_trade": -0.2095,
-    "total_pnl_adjusted": -45.25,
+    "avg_profit_pct_raw": 25.0,
+    "avg_pnl_per_trade": -0.2477,
+    "total_pnl_adjusted": -54.0,
     "full_hedge": 0,
     "covered": 0,
-    "loss": 49,
+    "loss": 51,
     "poly_only": 0
   },
   "cumulative_pnl": [
@@ -1098,9 +1098,55 @@
       "ts": "2026-05-05T12:04:04.618073+00:00",
       "pnl_adjusted": 1.5,
       "cumulative": -45.25
+    },
+    {
+      "ts": "2026-05-05T13:54:26.963709+00:00",
+      "pnl_adjusted": -4.3,
+      "cumulative": -49.55
+    },
+    {
+      "ts": "2026-05-05T13:54:34.216566+00:00",
+      "pnl_adjusted": -4.45,
+      "cumulative": -54.0
     }
   ],
   "trades": [
+    {
+      "ts": "2026-05-05T13:54:34.216566+00:00",
+      "trade": "DOWN_Poly + YES_Kalshi",
+      "cost": 0.89,
+      "profit_pct_raw": 12.4,
+      "dead_zone": 1.48,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.15,
+      "kalshi_price": 0.72,
+      "pnl_adjusted": -4.45,
+      "kalshi_fees": 0,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
+    {
+      "ts": "2026-05-05T13:54:26.963709+00:00",
+      "trade": "DOWN_Poly + YES_Kalshi",
+      "cost": 0.86,
+      "profit_pct_raw": 16.3,
+      "dead_zone": 1.48,
+      "poly_ok": true,
+      "kalshi_ok": true,
+      "units": 5,
+      "poly_price": 0.15,
+      "kalshi_price": 0.69,
+      "pnl_adjusted": -4.3,
+      "kalshi_fees": 0,
+      "resolved": true,
+      "outcome": "LOSS (dead zone)",
+      "poly_fill_s": null,
+      "kalshi_fill_s": null
+    },
     {
       "ts": "2026-05-05T12:04:04.618073+00:00",
       "trade": "UP_Poly + NO_Kalshi",
