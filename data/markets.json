@@ -1,73 +1,63 @@
 {
-  "updated_at": "2026-05-14T20:35:07.162999+00:00",
+  "updated_at": "2026-05-14T20:50:06.625175+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 81222.97,
-      "poly_up": 0.11,
-      "poly_down": 0.9,
+      "price": 81361.2,
+      "poly_up": 0.25,
+      "poly_down": 0.76,
       "poly_open": 81419.75,
-      "kalshi_levels": 4,
+      "kalshi_levels": 2,
       "kalshi_raw": [
         {
-          "t": 81000.0,
-          "ya": 0.91,
-          "na": 0.11
-        },
-        {
           "t": 81250.0,
-          "ya": 0.46,
-          "na": 0.55
+          "ya": 0.88,
+          "na": 0.14
         },
         {
           "t": 81500.0,
-          "ya": 0.1,
-          "na": 0.91
-        },
-        {
-          "t": 81750.0,
-          "ya": 0.03,
-          "na": 0.99
+          "ya": 0.07,
+          "na": 0.95
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
           "kalshi_level": 81250.0,
-          "poly_price": 0.11,
-          "kalshi_price": 0.55,
-          "cost": 0.66,
-          "profit_pct": 51.5,
+          "poly_price": 0.25,
+          "kalshi_price": 0.14,
+          "cost": 0.39,
+          "profit_pct": 156.4,
           "dead_zone": 169.75,
           "units": 5,
-          "deploy_dollars": 3.3,
-          "kalshi_vol": 211697.63,
+          "deploy_dollars": 1.95,
+          "kalshi_vol": 331299.06,
           "close_time": "2026-05-14T21:00:00Z",
           "qualified": false,
           "block_reason": "DZ $170 > max $40"
         },
         {
           "direction": "DOWN + YES",
-          "kalshi_level": 81750.0,
-          "poly_price": 0.9,
-          "kalshi_price": 0.03,
-          "cost": 0.93,
-          "profit_pct": 7.5,
-          "dead_zone": 330.25,
+          "kalshi_level": 81500.0,
+          "poly_price": 0.76,
+          "kalshi_price": 0.07,
+          "cost": 0.83,
+          "profit_pct": 20.5,
+          "dead_zone": 80.25,
           "units": 5,
-          "deploy_dollars": 4.65,
-          "kalshi_vol": 268713.74,
+          "deploy_dollars": 4.15,
+          "kalshi_vol": 404508.67,
           "close_time": "2026-05-14T21:00:00Z",
           "qualified": false,
-          "block_reason": "DZ $330 > max $40"
+          "block_reason": "DZ $80 > max $40"
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 2290.1,
-      "poly_up": 0.11,
-      "poly_down": 0.91,
+      "price": 2295.27,
+      "poly_up": 0.06,
+      "poly_down": 0.95,
       "poly_open": 2298.34,
       "kalshi_levels": 40,
       "kalshi_raw": [
@@ -169,12 +159,12 @@
         {
           "t": 2260.0,
           "ya": 1.0,
-          "na": 0.03
+          "na": 0.01
         },
         {
           "t": 2300.0,
-          "ya": 0.05,
-          "na": 0.97
+          "ya": 0.07,
+          "na": 0.94
         },
         {
           "t": 2340.0,
@@ -276,32 +266,32 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 2260.0,
-          "poly_price": 0.11,
-          "kalshi_price": 0.03,
-          "cost": 0.14,
-          "profit_pct": 614.3,
+          "poly_price": 0.06,
+          "kalshi_price": 0.01,
+          "cost": 0.07,
+          "profit_pct": 1328.6,
           "dead_zone": 38.34,
-          "units": 14,
+          "units": 28,
           "deploy_dollars": 1.96,
-          "kalshi_vol": 5927.2,
+          "kalshi_vol": 5989.62,
           "close_time": null,
           "qualified": true,
           "block_reason": null
         },
         {
           "direction": "DOWN + YES",
-          "kalshi_level": 2300.0,
-          "poly_price": 0.91,
-          "kalshi_price": 0.05,
+          "kalshi_level": 2340.0,
+          "poly_price": 0.95,
+          "kalshi_price": 0.01,
           "cost": 0.96,
           "profit_pct": 4.2,
-          "dead_zone": 1.66,
+          "dead_zone": 41.66,
           "units": 5,
           "deploy_dollars": 4.8,
-          "kalshi_vol": 23382.16,
+          "kalshi_vol": 16418.12,
           "close_time": null,
           "qualified": false,
-          "block_reason": "profit 4.2% < min 12%"
+          "block_reason": "DZ $42 > max $40"
         }
       ]
     }
