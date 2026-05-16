@@ -1,61 +1,487 @@
 {
-  "updated_at": "2026-05-16T03:50:07.207164+00:00",
+  "updated_at": "2026-05-16T04:05:06.610442+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 79074.41,
-      "poly_up": 0.05,
-      "poly_down": 0.96,
-      "poly_open": 79155.55,
-      "kalshi_levels": 0,
-      "kalshi_raw": [],
+      "price": 79111.68,
+      "poly_up": 0.6,
+      "poly_down": 0.41,
+      "poly_open": 79083.19,
+      "kalshi_levels": 5,
+      "kalshi_raw": [
+        {
+          "t": 78900.0,
+          "ya": 0.96,
+          "na": 0.05
+        },
+        {
+          "t": 79000.0,
+          "ya": 0.79,
+          "na": 0.22
+        },
+        {
+          "t": 79100.0,
+          "ya": 0.41,
+          "na": 0.6
+        },
+        {
+          "t": 79200.0,
+          "ya": 0.09,
+          "na": 0.92
+        },
+        {
+          "t": 79300.0,
+          "ya": 0.02,
+          "na": 0.99
+        }
+      ],
       "trades": [
         {
           "direction": "UP + NO",
+          "kalshi_level": 79000.0,
+          "poly_price": 0.6,
+          "kalshi_price": 0.22,
+          "cost": 0.82,
+          "profit_pct": 22.0,
+          "dead_zone": 83.19,
+          "units": 5,
+          "deploy_dollars": 4.1,
+          "kalshi_vol": 20004.22,
+          "close_time": "2026-05-16T05:00:00Z",
           "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "block_reason": "DZ $83 > max $40"
         },
         {
           "direction": "DOWN + YES",
-          "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "kalshi_level": 79100.0,
+          "poly_price": 0.41,
+          "kalshi_price": 0.41,
+          "cost": 0.82,
+          "profit_pct": 22.0,
+          "dead_zone": 16.81,
+          "units": 5,
+          "deploy_dollars": 4.1,
+          "kalshi_vol": 31011.96,
+          "close_time": "2026-05-16T05:00:00Z",
+          "qualified": true,
+          "block_reason": null
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 2227.75,
-      "poly_up": 0.18,
-      "poly_down": 0.83,
-      "poly_open": 2229.91,
-      "kalshi_levels": 0,
-      "kalshi_raw": [],
+      "price": 2228.6,
+      "poly_up": 0.54,
+      "poly_down": 0.47,
+      "poly_open": 2228.0,
+      "kalshi_levels": 75,
+      "kalshi_raw": [
+        {
+          "t": 1510.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1530.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1550.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1570.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1590.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1610.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1630.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1650.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1670.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1690.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1710.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1730.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1750.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1770.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1790.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1810.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1830.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1850.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1870.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1890.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1910.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1930.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1950.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1970.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 1990.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2010.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2030.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2050.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2070.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2090.0,
+          "ya": 1.0,
+          "na": 0.01
+        },
+        {
+          "t": 2110.0,
+          "ya": 1.0,
+          "na": 0.02
+        },
+        {
+          "t": 2130.0,
+          "ya": 1.0,
+          "na": 0.02
+        },
+        {
+          "t": 2150.0,
+          "ya": 1.0,
+          "na": 0.02
+        },
+        {
+          "t": 2170.0,
+          "ya": 1.0,
+          "na": 0.05
+        },
+        {
+          "t": 2190.0,
+          "ya": 1.0,
+          "na": 0.16
+        },
+        {
+          "t": 2210.0,
+          "ya": 1.0,
+          "na": 0.04
+        },
+        {
+          "t": 2230.0,
+          "ya": 0.26,
+          "na": 0.79
+        },
+        {
+          "t": 2250.0,
+          "ya": 0.03,
+          "na": 1.0
+        },
+        {
+          "t": 2270.0,
+          "ya": 0.02,
+          "na": 1.0
+        },
+        {
+          "t": 2290.0,
+          "ya": 0.02,
+          "na": 1.0
+        },
+        {
+          "t": 2310.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2330.0,
+          "ya": 0.02,
+          "na": 1.0
+        },
+        {
+          "t": 2350.0,
+          "ya": 0.02,
+          "na": 1.0
+        },
+        {
+          "t": 2370.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2390.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2410.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2430.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2450.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2470.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2490.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2510.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2530.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2550.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2570.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2590.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2610.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2630.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2650.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2670.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2690.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2710.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2730.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2750.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2770.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2790.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2810.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2830.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2850.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2870.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2890.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2910.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2930.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2950.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2970.0,
+          "ya": 0.01,
+          "na": 1.0
+        },
+        {
+          "t": 2990.0,
+          "ya": 0.01,
+          "na": 1.0
+        }
+      ],
       "trades": [
         {
           "direction": "UP + NO",
-          "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "kalshi_level": 2210.0,
+          "poly_price": 0.54,
+          "kalshi_price": 0.04,
+          "cost": 0.58,
+          "profit_pct": 72.4,
+          "dead_zone": 18.0,
+          "units": 5,
+          "deploy_dollars": 2.9,
+          "kalshi_vol": 50.0,
+          "close_time": null,
+          "qualified": true,
+          "block_reason": null
         },
         {
           "direction": "DOWN + YES",
-          "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "kalshi_level": 2230.0,
+          "poly_price": 0.47,
+          "kalshi_price": 0.26,
+          "cost": 0.73,
+          "profit_pct": 37.0,
+          "dead_zone": 2.0,
+          "units": 5,
+          "deploy_dollars": 3.65,
+          "kalshi_vol": 106.0,
+          "close_time": null,
+          "qualified": true,
+          "block_reason": null
         }
       ]
     }
