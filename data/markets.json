@@ -1,83 +1,62 @@
 {
-  "updated_at": "2026-06-14T07:35:07.250930+00:00",
+  "updated_at": "2026-06-14T07:50:07.639755+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 64335.82,
-      "poly_up": 0.73,
-      "poly_down": 0.28,
+      "price": 64421.62,
+      "poly_up": 0.98,
+      "poly_down": 0.03,
       "poly_open": 64286.1,
-      "kalshi_levels": 6,
+      "kalshi_levels": 3,
       "kalshi_raw": [
         {
-          "t": 64000.0,
-          "ya": 1.0,
-          "na": 0.02
-        },
-        {
-          "t": 64100.0,
-          "ya": 1.0,
-          "na": 0.02
-        },
-        {
-          "t": 64200.0,
+          "t": 64300.0,
           "ya": 0.95,
           "na": 0.06
         },
         {
-          "t": 64300.0,
-          "ya": 0.58,
-          "na": 0.43
-        },
-        {
           "t": 64400.0,
-          "ya": 0.12,
-          "na": 0.9
+          "ya": 0.24,
+          "na": 0.77
         },
         {
           "t": 64500.0,
           "ya": 0.03,
-          "na": 0.99
+          "na": 0.98
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
-          "kalshi_level": 64200.0,
-          "poly_price": 0.73,
-          "kalshi_price": 0.06,
-          "cost": 0.79,
-          "profit_pct": 26.6,
-          "dead_zone": 86.1,
-          "units": 5,
-          "deploy_dollars": 3.95,
-          "kalshi_vol": 159828.1,
-          "close_time": "2026-06-14T08:00:00Z",
           "qualified": false,
-          "block_reason": "DZ $86 > max $40"
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         },
         {
           "direction": "DOWN + YES",
           "kalshi_level": 64300.0,
-          "poly_price": 0.28,
-          "kalshi_price": 0.58,
-          "cost": 0.86,
-          "profit_pct": 16.3,
+          "poly_price": 0.03,
+          "kalshi_price": 0.95,
+          "cost": 0.98,
+          "profit_pct": 2.0,
           "dead_zone": 13.9,
           "units": 5,
-          "deploy_dollars": 4.3,
-          "kalshi_vol": 195041.85,
+          "deploy_dollars": 4.9,
+          "kalshi_vol": 364522.54,
           "close_time": "2026-06-14T08:00:00Z",
-          "qualified": true,
-          "block_reason": null
+          "qualified": false,
+          "block_reason": "profit 2.0% < min 12%"
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 1675.76,
-      "poly_up": 0.58,
-      "poly_down": 0.43,
+      "price": 1675.75,
+      "poly_up": 0.27,
+      "poly_down": 0.74,
       "poly_open": 1676.4,
       "kalshi_levels": 75,
       "kalshi_raw": [
@@ -273,8 +252,8 @@
         },
         {
           "t": 1670.0,
-          "ya": 0.98,
-          "na": 0.04
+          "ya": 1.0,
+          "na": 0.02
         },
         {
           "t": 1690.0,
@@ -461,14 +440,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1670.0,
-          "poly_price": 0.58,
-          "kalshi_price": 0.04,
-          "cost": 0.62,
-          "profit_pct": 61.3,
+          "poly_price": 0.27,
+          "kalshi_price": 0.02,
+          "cost": 0.29,
+          "profit_pct": 244.8,
           "dead_zone": 6.4,
-          "units": 5,
-          "deploy_dollars": 3.1,
-          "kalshi_vol": 1736.26,
+          "units": 6,
+          "deploy_dollars": 1.74,
+          "kalshi_vol": 2771.38,
           "close_time": null,
           "qualified": true,
           "block_reason": null
@@ -476,14 +455,14 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1690.0,
-          "poly_price": 0.43,
+          "poly_price": 0.74,
           "kalshi_price": 0.01,
-          "cost": 0.44,
-          "profit_pct": 127.3,
+          "cost": 0.75,
+          "profit_pct": 33.3,
           "dead_zone": 13.6,
           "units": 5,
-          "deploy_dollars": 2.2,
-          "kalshi_vol": 2677.87,
+          "deploy_dollars": 3.75,
+          "kalshi_vol": 2799.63,
           "close_time": null,
           "qualified": true,
           "block_reason": null
