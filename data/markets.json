@@ -1,14 +1,19 @@
 {
-  "updated_at": "2026-06-15T20:35:07.095999+00:00",
+  "updated_at": "2026-06-15T20:50:07.062955+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 66666.0,
-      "poly_up": 0.68,
-      "poly_down": 0.33,
+      "price": 66515.09,
+      "poly_up": 0.15,
+      "poly_down": 0.86,
       "poly_open": 66615.98,
-      "kalshi_levels": 4,
+      "kalshi_levels": 3,
       "kalshi_raw": [
+        {
+          "t": 62750.0,
+          "ya": 1.0,
+          "na": 0.02
+        },
         {
           "t": 66250.0,
           "ya": 0.99,
@@ -16,58 +21,42 @@
         },
         {
           "t": 66500.0,
-          "ya": 0.89,
-          "na": 0.13
-        },
-        {
-          "t": 66750.0,
-          "ya": 0.18,
-          "na": 0.83
-        },
-        {
-          "t": 67000.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.46,
+          "na": 0.55
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
           "kalshi_level": 66500.0,
-          "poly_price": 0.68,
-          "kalshi_price": 0.13,
-          "cost": 0.81,
-          "profit_pct": 23.5,
+          "poly_price": 0.15,
+          "kalshi_price": 0.55,
+          "cost": 0.7,
+          "profit_pct": 42.9,
           "dead_zone": 115.98,
           "units": 5,
-          "deploy_dollars": 4.05,
-          "kalshi_vol": 479675.04,
+          "deploy_dollars": 3.5,
+          "kalshi_vol": 705645.92,
           "close_time": "2026-06-15T21:00:00Z",
           "qualified": false,
           "block_reason": "DZ $116 > max $40"
         },
         {
           "direction": "DOWN + YES",
-          "kalshi_level": 66750.0,
-          "poly_price": 0.33,
-          "kalshi_price": 0.18,
-          "cost": 0.51,
-          "profit_pct": 96.1,
-          "dead_zone": 134.02,
-          "units": 5,
-          "deploy_dollars": 2.55,
-          "kalshi_vol": 385302.75,
-          "close_time": "2026-06-15T21:00:00Z",
           "qualified": false,
-          "block_reason": "DZ $134 > max $40"
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 1820.97,
-      "poly_up": 0.54,
-      "poly_down": 0.47,
+      "price": 1816.34,
+      "poly_up": 0.4,
+      "poly_down": 0.61,
       "poly_open": 1821.88,
       "kalshi_levels": 40,
       "kalshi_raw": [
@@ -193,13 +182,13 @@
         },
         {
           "t": 1810.0,
-          "ya": 0.98,
-          "na": 0.04
+          "ya": 0.94,
+          "na": 0.07
         },
         {
           "t": 1850.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.01,
+          "na": 1.0
         },
         {
           "t": 1890.0,
@@ -276,14 +265,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1810.0,
-          "poly_price": 0.54,
-          "kalshi_price": 0.04,
-          "cost": 0.58,
-          "profit_pct": 72.4,
+          "poly_price": 0.4,
+          "kalshi_price": 0.07,
+          "cost": 0.47,
+          "profit_pct": 112.8,
           "dead_zone": 11.88,
           "units": 5,
-          "deploy_dollars": 2.9,
-          "kalshi_vol": 42298.16,
+          "deploy_dollars": 2.35,
+          "kalshi_vol": 47839.31,
           "close_time": null,
           "qualified": true,
           "block_reason": null
@@ -291,14 +280,14 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1850.0,
-          "poly_price": 0.47,
-          "kalshi_price": 0.02,
-          "cost": 0.49,
-          "profit_pct": 104.1,
+          "poly_price": 0.61,
+          "kalshi_price": 0.01,
+          "cost": 0.62,
+          "profit_pct": 61.3,
           "dead_zone": 28.12,
           "units": 5,
-          "deploy_dollars": 2.45,
-          "kalshi_vol": 48778.27,
+          "deploy_dollars": 3.1,
+          "kalshi_vol": 53181.02,
           "close_time": null,
           "qualified": true,
           "block_reason": null
