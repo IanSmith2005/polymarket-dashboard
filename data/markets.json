@@ -1,73 +1,109 @@
 {
-  "updated_at": "2026-07-03T05:50:07.734924+00:00",
+  "updated_at": "2026-07-03T06:05:07.974597+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 61732.0,
-      "poly_up": 0.999,
-      "poly_down": 0.004,
-      "poly_open": 61448.0,
-      "kalshi_levels": 5,
+      "price": 61847.25,
+      "poly_up": 0.7,
+      "poly_down": 0.31,
+      "poly_open": 61700.49,
+      "kalshi_levels": 11,
       "kalshi_raw": [
         {
-          "t": 61400.0,
+          "t": 61300.0,
           "ya": 0.99,
           "na": 0.02
         },
         {
+          "t": 61400.0,
+          "ya": 0.98,
+          "na": 0.03
+        },
+        {
           "t": 61500.0,
-          "ya": 0.97,
-          "na": 0.04
+          "ya": 0.95,
+          "na": 0.06
         },
         {
           "t": 61600.0,
-          "ya": 0.79,
-          "na": 0.22
+          "ya": 0.84,
+          "na": 0.17
         },
         {
           "t": 61700.0,
-          "ya": 0.27,
-          "na": 0.74
+          "ya": 0.69,
+          "na": 0.32
         },
         {
           "t": 61800.0,
-          "ya": 0.05,
-          "na": 0.96
+          "ya": 0.45,
+          "na": 0.56
+        },
+        {
+          "t": 61900.0,
+          "ya": 0.23,
+          "na": 0.78
+        },
+        {
+          "t": 62000.0,
+          "ya": 0.12,
+          "na": 0.89
+        },
+        {
+          "t": 62100.0,
+          "ya": 0.04,
+          "na": 0.97
+        },
+        {
+          "t": 62200.0,
+          "ya": 0.02,
+          "na": 0.99
+        },
+        {
+          "t": 62300.0,
+          "ya": 0.02,
+          "na": 0.99
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
+          "kalshi_level": 61600.0,
+          "poly_price": 0.7,
+          "kalshi_price": 0.17,
+          "cost": 0.87,
+          "profit_pct": 14.9,
+          "dead_zone": 100.49,
+          "units": 5,
+          "deploy_dollars": 4.35,
+          "kalshi_vol": 62304.09,
+          "close_time": "2026-07-03T07:00:00Z",
           "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "block_reason": "DZ $100 > max $40"
         },
         {
           "direction": "DOWN + YES",
-          "kalshi_level": 61400.0,
-          "poly_price": 0.004,
-          "kalshi_price": 0.99,
-          "cost": 0.994,
-          "profit_pct": 0.6,
-          "dead_zone": 0.0,
+          "kalshi_level": 61800.0,
+          "poly_price": 0.31,
+          "kalshi_price": 0.45,
+          "cost": 0.76,
+          "profit_pct": 31.6,
+          "dead_zone": 99.51,
           "units": 5,
-          "deploy_dollars": 4.97,
-          "kalshi_vol": 277013.97,
-          "close_time": "2026-07-03T06:00:00Z",
+          "deploy_dollars": 3.8,
+          "kalshi_vol": 26366.83,
+          "close_time": "2026-07-03T07:00:00Z",
           "qualified": false,
-          "block_reason": "profit 0.6% < min 12%"
+          "block_reason": "DZ $100 > max $40"
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 1717.0,
-      "poly_up": 0.994,
-      "poly_down": 0.008,
-      "poly_open": 1703.07,
+      "price": 1718.74,
+      "poly_up": 0.45,
+      "poly_down": 0.57,
+      "poly_open": 1714.93,
       "kalshi_levels": 75,
       "kalshi_raw": [
         {
@@ -258,7 +294,7 @@
         {
           "t": 1600.0,
           "ya": 1.0,
-          "na": 0.01
+          "na": 0.02
         },
         {
           "t": 1620.0,
@@ -278,17 +314,17 @@
         {
           "t": 1680.0,
           "ya": 1.0,
-          "na": 0.01
-        },
-        {
-          "t": 1700.0,
-          "ya": 1.0,
           "na": 0.02
         },
         {
+          "t": 1700.0,
+          "ya": 0.98,
+          "na": 0.03
+        },
+        {
           "t": 1720.0,
-          "ya": 0.11,
-          "na": 0.94
+          "ya": 0.32,
+          "na": 0.71
         },
         {
           "t": 1740.0,
@@ -449,24 +485,30 @@
       "trades": [
         {
           "direction": "UP + NO",
-          "qualified": false,
-          "block_reason": "no arb (cost \u2265 $1 on all levels)",
-          "dead_zone": null,
-          "profit_pct": null,
-          "cost": null,
-          "deploy_dollars": null
+          "kalshi_level": 1700.0,
+          "poly_price": 0.45,
+          "kalshi_price": 0.03,
+          "cost": 0.48,
+          "profit_pct": 108.3,
+          "dead_zone": 14.93,
+          "units": 5,
+          "deploy_dollars": 2.4,
+          "kalshi_vol": 4.0,
+          "close_time": null,
+          "qualified": true,
+          "block_reason": null
         },
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1720.0,
-          "poly_price": 0.008,
-          "kalshi_price": 0.11,
-          "cost": 0.118,
-          "profit_pct": 747.5,
-          "dead_zone": 16.93,
-          "units": 16,
-          "deploy_dollars": 1.89,
-          "kalshi_vol": 23463.62,
+          "poly_price": 0.57,
+          "kalshi_price": 0.32,
+          "cost": 0.89,
+          "profit_pct": 12.4,
+          "dead_zone": 5.07,
+          "units": 5,
+          "deploy_dollars": 4.45,
+          "kalshi_vol": 567.71,
           "close_time": null,
           "qualified": true,
           "block_reason": null
