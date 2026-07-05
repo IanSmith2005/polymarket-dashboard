@@ -1,68 +1,52 @@
 {
-  "updated_at": "2026-07-05T20:35:06.651276+00:00",
+  "updated_at": "2026-07-05T20:50:06.807199+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 62730.01,
-      "poly_up": 0.33,
-      "poly_down": 0.68,
+      "price": 62750.0,
+      "poly_up": 0.38,
+      "poly_down": 0.63,
       "poly_open": 62768.87,
-      "kalshi_levels": 3,
+      "kalshi_levels": 1,
       "kalshi_raw": [
         {
-          "t": 62500.0,
-          "ya": 0.99,
-          "na": 0.02
-        },
-        {
           "t": 62750.0,
-          "ya": 0.27,
-          "na": 0.74
-        },
-        {
-          "t": 63000.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.19,
+          "na": 0.84
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
-          "kalshi_level": 62500.0,
-          "poly_price": 0.33,
-          "kalshi_price": 0.02,
-          "cost": 0.35,
-          "profit_pct": 185.7,
-          "dead_zone": 268.87,
-          "units": 5,
-          "deploy_dollars": 1.75,
-          "kalshi_vol": 386122.03,
-          "close_time": "2026-07-05T21:00:00Z",
           "qualified": false,
-          "block_reason": "DZ $269 > max $40"
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         },
         {
           "direction": "DOWN + YES",
           "kalshi_level": 62750.0,
-          "poly_price": 0.68,
-          "kalshi_price": 0.27,
-          "cost": 0.95,
-          "profit_pct": 5.3,
+          "poly_price": 0.63,
+          "kalshi_price": 0.19,
+          "cost": 0.82,
+          "profit_pct": 22.0,
           "dead_zone": 0.0,
           "units": 5,
-          "deploy_dollars": 4.75,
-          "kalshi_vol": 621089.04,
+          "deploy_dollars": 4.1,
+          "kalshi_vol": 738240.58,
           "close_time": "2026-07-05T21:00:00Z",
-          "qualified": false,
-          "block_reason": "profit 5.3% < min 12%"
+          "qualified": true,
+          "block_reason": null
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 1777.61,
-      "poly_up": 0.14,
-      "poly_down": 0.87,
+      "price": 1777.9,
+      "poly_up": 0.07,
+      "poly_down": 0.94,
       "poly_open": 1781.44,
       "kalshi_levels": 40,
       "kalshi_raw": [
@@ -168,13 +152,13 @@
         },
         {
           "t": 1750.0,
-          "ya": 0.99,
-          "na": 0.02
+          "ya": 1.0,
+          "na": 0.01
         },
         {
           "t": 1790.0,
-          "ya": 0.04,
-          "na": 0.98
+          "ya": 0.03,
+          "na": 0.99
         },
         {
           "t": 1830.0,
@@ -271,14 +255,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1750.0,
-          "poly_price": 0.14,
-          "kalshi_price": 0.02,
-          "cost": 0.16,
-          "profit_pct": 525.0,
+          "poly_price": 0.07,
+          "kalshi_price": 0.01,
+          "cost": 0.08,
+          "profit_pct": 1150.0,
           "dead_zone": 31.44,
-          "units": 12,
-          "deploy_dollars": 1.92,
-          "kalshi_vol": 16387.3,
+          "units": 25,
+          "deploy_dollars": 2.0,
+          "kalshi_vol": 19355.97,
           "close_time": null,
           "qualified": true,
           "block_reason": null
@@ -286,17 +270,17 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1790.0,
-          "poly_price": 0.87,
-          "kalshi_price": 0.04,
-          "cost": 0.91,
-          "profit_pct": 9.9,
+          "poly_price": 0.94,
+          "kalshi_price": 0.03,
+          "cost": 0.97,
+          "profit_pct": 3.1,
           "dead_zone": 8.56,
           "units": 5,
-          "deploy_dollars": 4.55,
-          "kalshi_vol": 34988.13,
+          "deploy_dollars": 4.85,
+          "kalshi_vol": 36866.89,
           "close_time": null,
           "qualified": false,
-          "block_reason": "profit 9.9% < min 12%"
+          "block_reason": "profit 3.1% < min 12%"
         }
       ]
     }
