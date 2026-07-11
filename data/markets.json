@@ -1,13 +1,13 @@
 {
-  "updated_at": "2026-07-11T07:35:07.212700+00:00",
+  "updated_at": "2026-07-11T07:50:07.117498+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 64200.85,
-      "poly_up": 0.42,
-      "poly_down": 0.59,
+      "price": 64164.01,
+      "poly_up": 0.11,
+      "poly_down": 0.91,
       "poly_open": 64219.09,
-      "kalshi_levels": 5,
+      "kalshi_levels": 4,
       "kalshi_raw": [
         {
           "t": 64000.0,
@@ -16,21 +16,16 @@
         },
         {
           "t": 64100.0,
-          "ya": 0.83,
-          "na": 0.18
+          "ya": 0.89,
+          "na": 0.12
         },
         {
           "t": 64200.0,
-          "ya": 0.21,
-          "na": 0.8
+          "ya": 0.07,
+          "na": 0.94
         },
         {
           "t": 64300.0,
-          "ya": 0.03,
-          "na": 0.98
-        },
-        {
-          "t": 64400.0,
           "ya": 0.02,
           "na": 0.99
         }
@@ -39,14 +34,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 64100.0,
-          "poly_price": 0.42,
-          "kalshi_price": 0.18,
-          "cost": 0.6,
-          "profit_pct": 66.7,
+          "poly_price": 0.11,
+          "kalshi_price": 0.12,
+          "cost": 0.23,
+          "profit_pct": 334.8,
           "dead_zone": 119.09,
-          "units": 5,
-          "deploy_dollars": 3.0,
-          "kalshi_vol": 146968.46,
+          "units": 8,
+          "deploy_dollars": 1.84,
+          "kalshi_vol": 233494.5,
           "close_time": "2026-07-11T08:00:00Z",
           "qualified": false,
           "block_reason": "DZ $119 > max $40"
@@ -54,25 +49,25 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 64200.0,
-          "poly_price": 0.59,
-          "kalshi_price": 0.21,
-          "cost": 0.8,
-          "profit_pct": 25.0,
+          "poly_price": 0.91,
+          "kalshi_price": 0.07,
+          "cost": 0.98,
+          "profit_pct": 2.0,
           "dead_zone": 0.0,
           "units": 5,
-          "deploy_dollars": 4.0,
-          "kalshi_vol": 177396.68,
+          "deploy_dollars": 4.9,
+          "kalshi_vol": 272383.76,
           "close_time": "2026-07-11T08:00:00Z",
-          "qualified": true,
-          "block_reason": null
+          "qualified": false,
+          "block_reason": "profit 2.0% < min 12%"
         }
       ]
     },
     {
       "asset": "ETH",
-      "price": 1800.22,
-      "poly_up": 0.81,
-      "poly_down": 0.2,
+      "price": 1799.98,
+      "poly_up": 0.71,
+      "poly_down": 0.31,
       "poly_open": 1799.31,
       "kalshi_levels": 75,
       "kalshi_raw": [
@@ -278,8 +273,8 @@
         },
         {
           "t": 1810.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.01,
+          "na": 1.0
         },
         {
           "t": 1830.0,
@@ -456,14 +451,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1790.0,
-          "poly_price": 0.81,
+          "poly_price": 0.71,
           "kalshi_price": 0.01,
-          "cost": 0.82,
-          "profit_pct": 22.0,
+          "cost": 0.72,
+          "profit_pct": 38.9,
           "dead_zone": 9.31,
           "units": 5,
-          "deploy_dollars": 4.1,
-          "kalshi_vol": 2943.33,
+          "deploy_dollars": 3.6,
+          "kalshi_vol": 2980.33,
           "close_time": null,
           "qualified": true,
           "block_reason": null
@@ -471,14 +466,14 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1810.0,
-          "poly_price": 0.2,
-          "kalshi_price": 0.02,
-          "cost": 0.22,
-          "profit_pct": 354.5,
+          "poly_price": 0.31,
+          "kalshi_price": 0.01,
+          "cost": 0.32,
+          "profit_pct": 212.5,
           "dead_zone": 10.69,
-          "units": 9,
-          "deploy_dollars": 1.98,
-          "kalshi_vol": 15375.84,
+          "units": 6,
+          "deploy_dollars": 1.92,
+          "kalshi_vol": 18794.12,
           "close_time": null,
           "qualified": true,
           "block_reason": null
