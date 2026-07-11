@@ -1,67 +1,51 @@
 {
-  "updated_at": "2026-07-11T14:35:06.747874+00:00",
+  "updated_at": "2026-07-11T14:50:06.684270+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 64425.98,
-      "poly_up": 0.94,
-      "poly_down": 0.07,
+      "price": 64380.02,
+      "poly_up": 0.98,
+      "poly_down": 0.021,
       "poly_open": 64235.67,
-      "kalshi_levels": 5,
+      "kalshi_levels": 3,
       "kalshi_raw": [
         {
           "t": 64200.0,
-          "ya": 0.97,
-          "na": 0.04
+          "ya": 0.99,
+          "na": 0.02
         },
         {
           "t": 64300.0,
-          "ya": 0.75,
-          "na": 0.26
+          "ya": 0.77,
+          "na": 0.24
         },
         {
           "t": 64400.0,
-          "ya": 0.38,
-          "na": 0.63
-        },
-        {
-          "t": 64500.0,
-          "ya": 0.08,
-          "na": 0.93
-        },
-        {
-          "t": 64600.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.11,
+          "na": 0.9
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
-          "kalshi_level": 64200.0,
-          "poly_price": 0.94,
-          "kalshi_price": 0.04,
-          "cost": 0.98,
-          "profit_pct": 2.0,
-          "dead_zone": 35.67,
-          "units": 5,
-          "deploy_dollars": 4.9,
-          "kalshi_vol": 190452.06,
-          "close_time": "2026-07-11T15:00:00Z",
           "qualified": false,
-          "block_reason": "profit 2.0% < min 12%"
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         },
         {
           "direction": "DOWN + YES",
           "kalshi_level": 64300.0,
-          "poly_price": 0.07,
-          "kalshi_price": 0.75,
-          "cost": 0.82,
-          "profit_pct": 22.0,
+          "poly_price": 0.021,
+          "kalshi_price": 0.77,
+          "cost": 0.791,
+          "profit_pct": 26.4,
           "dead_zone": 64.33,
           "units": 5,
-          "deploy_dollars": 4.1,
-          "kalshi_vol": 357123.16,
+          "deploy_dollars": 3.96,
+          "kalshi_vol": 520507.56,
           "close_time": "2026-07-11T15:00:00Z",
           "qualified": false,
           "block_reason": "DZ $64 > max $40"
@@ -70,9 +54,9 @@
     },
     {
       "asset": "ETH",
-      "price": 1807.66,
-      "poly_up": 0.85,
-      "poly_down": 0.16,
+      "price": 1812.52,
+      "poly_up": 0.994,
+      "poly_down": 0.007,
       "poly_open": 1802.61,
       "kalshi_levels": 75,
       "kalshi_raw": [
@@ -278,8 +262,8 @@
         },
         {
           "t": 1810.0,
-          "ya": 0.15,
-          "na": 0.89
+          "ya": 0.68,
+          "na": 0.36
         },
         {
           "t": 1830.0,
@@ -455,30 +439,24 @@
       "trades": [
         {
           "direction": "UP + NO",
-          "kalshi_level": 1790.0,
-          "poly_price": 0.85,
-          "kalshi_price": 0.01,
-          "cost": 0.86,
-          "profit_pct": 16.3,
-          "dead_zone": 12.61,
-          "units": 5,
-          "deploy_dollars": 4.3,
-          "kalshi_vol": 966.34,
-          "close_time": null,
-          "qualified": true,
-          "block_reason": null
+          "qualified": false,
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         },
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1810.0,
-          "poly_price": 0.16,
-          "kalshi_price": 0.15,
-          "cost": 0.31,
-          "profit_pct": 222.6,
+          "poly_price": 0.007,
+          "kalshi_price": 0.68,
+          "cost": 0.687,
+          "profit_pct": 45.6,
           "dead_zone": 7.39,
-          "units": 6,
-          "deploy_dollars": 1.86,
-          "kalshi_vol": 6953.3,
+          "units": 5,
+          "deploy_dollars": 3.44,
+          "kalshi_vol": 24020.75,
           "close_time": null,
           "qualified": true,
           "block_reason": null
