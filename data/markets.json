@@ -1,65 +1,50 @@
 {
-  "updated_at": "2026-07-12T04:35:07.937536+00:00",
+  "updated_at": "2026-07-12T04:50:07.262531+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 64011.01,
-      "poly_up": 0.021,
-      "poly_down": 0.98,
+      "price": 63990.01,
+      "poly_up": 0.005,
+      "poly_down": 0.998,
       "poly_open": 64223.73,
-      "kalshi_levels": 7,
+      "kalshi_levels": 4,
       "kalshi_raw": [
         {
-          "t": 63700.0,
+          "t": 63800.0,
           "ya": 0.99,
           "na": 0.02
         },
         {
-          "t": 63800.0,
-          "ya": 0.96,
-          "na": 0.05
-        },
-        {
           "t": 63900.0,
-          "ya": 0.83,
-          "na": 0.19
+          "ya": 0.88,
+          "na": 0.13
         },
         {
           "t": 64000.0,
-          "ya": 0.43,
-          "na": 0.58
+          "ya": 0.18,
+          "na": 0.83
         },
         {
           "t": 64100.0,
-          "ya": 0.14,
-          "na": 0.87
-        },
-        {
-          "t": 64200.0,
-          "ya": 0.06,
-          "na": 0.95
-        },
-        {
-          "t": 64300.0,
-          "ya": 0.02,
-          "na": 0.99
+          "ya": 0.03,
+          "na": 0.98
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
-          "kalshi_level": 64200.0,
-          "poly_price": 0.021,
-          "kalshi_price": 0.95,
-          "cost": 0.971,
-          "profit_pct": 3.0,
-          "dead_zone": 23.73,
+          "kalshi_level": 64100.0,
+          "poly_price": 0.005,
+          "kalshi_price": 0.98,
+          "cost": 0.985,
+          "profit_pct": 1.5,
+          "dead_zone": 123.73,
           "units": 5,
-          "deploy_dollars": 4.85,
-          "kalshi_vol": 211896.16,
+          "deploy_dollars": 4.92,
+          "kalshi_vol": 514207.62,
           "close_time": "2026-07-12T05:00:00Z",
           "qualified": false,
-          "block_reason": "profit 3.0% < min 12%"
+          "block_reason": "DZ $124 > max $40"
         },
         {
           "direction": "DOWN + YES",
@@ -74,9 +59,9 @@
     },
     {
       "asset": "ETH",
-      "price": 1807.33,
-      "poly_up": 0.29,
-      "poly_down": 0.72,
+      "price": 1805.82,
+      "poly_up": 0.06,
+      "poly_down": 0.95,
       "poly_open": 1811.53,
       "kalshi_levels": 75,
       "kalshi_raw": [
@@ -267,8 +252,8 @@
         },
         {
           "t": 1800.0,
-          "ya": 0.96,
-          "na": 0.08
+          "ya": 0.99,
+          "na": 0.03
         },
         {
           "t": 1820.0,
@@ -277,7 +262,7 @@
         },
         {
           "t": 1840.0,
-          "ya": 0.02,
+          "ya": 0.01,
           "na": 1.0
         },
         {
@@ -460,14 +445,14 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1800.0,
-          "poly_price": 0.29,
-          "kalshi_price": 0.08,
-          "cost": 0.37,
-          "profit_pct": 170.3,
+          "poly_price": 0.06,
+          "kalshi_price": 0.03,
+          "cost": 0.09,
+          "profit_pct": 1011.1,
           "dead_zone": 11.53,
-          "units": 5,
-          "deploy_dollars": 1.85,
-          "kalshi_vol": 12223.41,
+          "units": 22,
+          "deploy_dollars": 1.98,
+          "kalshi_vol": 17261.15,
           "close_time": null,
           "qualified": true,
           "block_reason": null
@@ -475,17 +460,17 @@
         {
           "direction": "DOWN + YES",
           "kalshi_level": 1820.0,
-          "poly_price": 0.72,
+          "poly_price": 0.95,
           "kalshi_price": 0.02,
-          "cost": 0.74,
-          "profit_pct": 35.1,
+          "cost": 0.97,
+          "profit_pct": 3.1,
           "dead_zone": 8.47,
           "units": 5,
-          "deploy_dollars": 3.7,
-          "kalshi_vol": 19726.37,
+          "deploy_dollars": 4.85,
+          "kalshi_vol": 23805.12,
           "close_time": null,
-          "qualified": true,
-          "block_reason": null
+          "qualified": false,
+          "block_reason": "profit 3.1% < min 12%"
         }
       ]
     }
