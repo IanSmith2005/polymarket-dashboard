@@ -1,62 +1,47 @@
 {
-  "updated_at": "2026-07-24T00:35:07.113098+00:00",
+  "updated_at": "2026-07-24T00:50:07.440819+00:00",
   "assets": [
     {
       "asset": "BTC",
-      "price": 64832.6,
-      "poly_up": 0.03,
-      "poly_down": 0.98,
+      "price": 64932.25,
+      "poly_up": 0.02,
+      "poly_down": 0.989,
       "poly_open": 65098.98,
-      "kalshi_levels": 7,
+      "kalshi_levels": 4,
       "kalshi_raw": [
         {
-          "t": 64400.0,
-          "ya": 0.99,
-          "na": 0.02
-        },
-        {
-          "t": 64500.0,
-          "ya": 0.97,
-          "na": 0.04
-        },
-        {
-          "t": 64600.0,
-          "ya": 0.95,
-          "na": 0.06
-        },
-        {
           "t": 64700.0,
-          "ya": 0.8,
-          "na": 0.21
+          "ya": 0.98,
+          "na": 0.03
         },
         {
           "t": 64800.0,
-          "ya": 0.46,
-          "na": 0.55
+          "ya": 0.92,
+          "na": 0.09
         },
         {
           "t": 64900.0,
-          "ya": 0.18,
-          "na": 0.83
+          "ya": 0.39,
+          "na": 0.62
         },
         {
           "t": 65000.0,
-          "ya": 0.06,
-          "na": 0.95
+          "ya": 0.05,
+          "na": 0.96
         }
       ],
       "trades": [
         {
           "direction": "UP + NO",
           "kalshi_level": 65000.0,
-          "poly_price": 0.03,
-          "kalshi_price": 0.95,
+          "poly_price": 0.02,
+          "kalshi_price": 0.96,
           "cost": 0.98,
           "profit_pct": 2.0,
           "dead_zone": 98.98,
           "units": 5,
           "deploy_dollars": 4.9,
-          "kalshi_vol": 289809.44,
+          "kalshi_vol": 343067.42,
           "close_time": "2026-07-24T01:00:00Z",
           "qualified": false,
           "block_reason": "DZ $99 > max $40"
@@ -74,9 +59,9 @@
     },
     {
       "asset": "ETH",
-      "price": 1866.8,
-      "poly_up": 0.11,
-      "poly_down": 0.9,
+      "price": 1867.89,
+      "poly_up": 0.01,
+      "poly_down": 0.994,
       "poly_open": 1878.38,
       "kalshi_levels": 300,
       "kalshi_raw": [
@@ -787,33 +772,33 @@
         },
         {
           "t": 1855.0,
+          "ya": 0.99,
+          "na": 0.02
+        },
+        {
+          "t": 1860.0,
           "ya": 0.98,
           "na": 0.03
         },
         {
-          "t": 1860.0,
-          "ya": 0.89,
-          "na": 0.13
-        },
-        {
           "t": 1865.0,
-          "ya": 0.6,
-          "na": 0.42
+          "ya": 0.81,
+          "na": 0.23
         },
         {
           "t": 1870.0,
-          "ya": 0.25,
-          "na": 0.76
+          "ya": 0.19,
+          "na": 0.86
         },
         {
           "t": 1875.0,
-          "ya": 0.06,
-          "na": 0.95
+          "ya": 0.03,
+          "na": 0.99
         },
         {
           "t": 1880.0,
-          "ya": 0.03,
-          "na": 0.98
+          "ya": 0.02,
+          "na": 0.99
         },
         {
           "t": 1885.0,
@@ -1585,32 +1570,26 @@
         {
           "direction": "UP + NO",
           "kalshi_level": 1870.0,
-          "poly_price": 0.11,
-          "kalshi_price": 0.76,
+          "poly_price": 0.01,
+          "kalshi_price": 0.86,
           "cost": 0.87,
           "profit_pct": 14.9,
           "dead_zone": 8.38,
           "units": 5,
           "deploy_dollars": 4.35,
-          "kalshi_vol": 6640.09,
+          "kalshi_vol": 10412.83,
           "close_time": null,
           "qualified": true,
           "block_reason": null
         },
         {
           "direction": "DOWN + YES",
-          "kalshi_level": 1875.0,
-          "poly_price": 0.9,
-          "kalshi_price": 0.06,
-          "cost": 0.96,
-          "profit_pct": 4.2,
-          "dead_zone": 0.0,
-          "units": 5,
-          "deploy_dollars": 4.8,
-          "kalshi_vol": 9724.0,
-          "close_time": null,
           "qualified": false,
-          "block_reason": "profit 4.2% < min 12%"
+          "block_reason": "no arb (cost \u2265 $1 on all levels)",
+          "dead_zone": null,
+          "profit_pct": null,
+          "cost": null,
+          "deploy_dollars": null
         }
       ]
     }
